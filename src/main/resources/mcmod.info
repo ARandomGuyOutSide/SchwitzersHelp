@@ -1,6 +1,6 @@
 [
   {
-    "modid": "${id}",
+    "modid": "schwitzershelp",
     "name": "${name}",
     "description": "",
     "version": "${version}",
