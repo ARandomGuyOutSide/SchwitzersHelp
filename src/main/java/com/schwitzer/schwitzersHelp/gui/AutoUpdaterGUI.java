@@ -27,7 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
-    Credits to Yuro for this superb class from SchwitzersHelp
+    Credits to Yuro for this superb class from FarmHelperV2
 */
 public class AutoUpdaterGUI extends GuiScreen {
     static final int LIST_TOP_MARGIN = 80;
@@ -39,7 +39,7 @@ public class AutoUpdaterGUI extends GuiScreen {
     private static final int CONNECT_TIMEOUT = 10000;
     private static final int READ_TIMEOUT = 10000;
     public static boolean checkedForUpdates = false;
-    public static boolean isOutdated = false;
+    public static boolean isOutdated = true;
     public static boolean shownGui = false;
     public static String latestVersion = "";
     private static List<String> releaseMessage = new ArrayList<>();
@@ -314,7 +314,7 @@ public class AutoUpdaterGUI extends GuiScreen {
     private void drawOutdatedMessage() {
         float scale = 2;
         GL11.glScalef(scale, scale, 0.0F);
-        this.drawCenteredString(mc.fontRendererObj, "Outdated version of Farm Helper", (int) (this.width / 2f / scale),
+        this.drawCenteredString(mc.fontRendererObj, "Outdated version of SchwitzersHelp", (int) (this.width / 2f / scale),
                 (int) (30 / scale), Color.RED.darker().getRGB());
         GL11.glScalef(1.0F / scale, 1.0F / scale, 0.0F);
     }
