@@ -17,7 +17,6 @@ public class MixinGuiMainMenu {
     @Final
     @Inject(method = "updateScreen", at = @At("RETURN"))
     private void initGui(CallbackInfo ci) {
-        AutoUpdaterGUI.showGUI();
         if (!AutoUpdaterGUI.checkedForUpdates) {
             AutoUpdaterGUI.checkedForUpdates = true;
             AutoUpdaterGUI.getLatestVersion();

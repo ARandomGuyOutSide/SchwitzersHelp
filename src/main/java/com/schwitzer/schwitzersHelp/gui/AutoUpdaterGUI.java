@@ -39,7 +39,7 @@ public class AutoUpdaterGUI extends GuiScreen {
     private static final int CONNECT_TIMEOUT = 10000;
     private static final int READ_TIMEOUT = 10000;
     public static boolean checkedForUpdates = false;
-    public static boolean isOutdated = true;
+    public static boolean isOutdated = false;
     public static boolean shownGui = false;
     public static String latestVersion = "";
     private static List<String> releaseMessage = new ArrayList<>();
@@ -123,7 +123,7 @@ public class AutoUpdaterGUI extends GuiScreen {
             isOutdated = isOutdated();
 
             if (!isOutdated) {
-                System.out.println("Farm Helper is up to date!");
+                System.out.println("Schwitzers Help is up to date!");
                 return;
             }
 
@@ -324,7 +324,7 @@ public class AutoUpdaterGUI extends GuiScreen {
         GL11.glScalef(scale, scale, 0.0F);
         Color chroma = Color.getHSBColor((float) ((System.currentTimeMillis() / 10) % 500) / 500, 1, 1);
         OneColor color = new OneColor(chroma.getRed(), chroma.getGreen(), chroma.getBlue(), 255);
-        this.drawCenteredString(mc.fontRendererObj, "Updating Farm Helper... (" + downloadProgress + "%) Please wait",
+        this.drawCenteredString(mc.fontRendererObj, "Updating Schwitzers Help... (" + downloadProgress + "%) Please wait",
                 (int) (this.width / 2f / scale), (int) (30 / scale),
                 OneColor.HSBAtoARGB(color.getHue(), color.getSaturation(), color.getBrightness(), color.getAlpha()));
         GL11.glScalef(1.0F / scale, 1.0F / scale, 0.0F);
@@ -333,7 +333,7 @@ public class AutoUpdaterGUI extends GuiScreen {
     private void drawUpdateCompletedMessage() {
         float scale = 2;
         GL11.glScalef(scale, scale, 0.0F);
-        this.drawCenteredString(mc.fontRendererObj, "Farm Helper has been updated!", (int) (this.width / 2f / scale),
+        this.drawCenteredString(mc.fontRendererObj, "Schwitzers Help has been updated!", (int) (this.width / 2f / scale),
                 (int) (30 / scale), Color.GREEN.getRGB());
         GL11.glScalef(1.0F / scale, 1.0F / scale, 0.0F);
     }
