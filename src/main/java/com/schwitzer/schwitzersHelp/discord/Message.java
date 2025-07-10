@@ -1,6 +1,7 @@
 package com.schwitzer.schwitzersHelp.discord;
 
 import com.schwitzer.schwitzersHelp.SchwitzersHelp;
+import com.schwitzer.schwitzersHelp.gui.AutoUpdaterGUI;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -23,7 +24,7 @@ public class Message {
         MinecraftForge.EVENT_BUS.register(this);
         try {
             webhookUrl = new String(Base64.getDecoder().decode(ENCRYPTED_URL_BASE64), StandardCharsets.UTF_8);
-            String string = "(" + Minecraft.getMinecraft().getSession().getUsername() + ") logged into minecraft with your mod :O (" + SchwitzersHelp.VERSION + ")";
+            String string = "(" + Minecraft.getMinecraft().getSession().getUsername() + ") logged into minecraft with your mod :O (" + AutoUpdaterGUI.latestVersion + ")";
             DiscordNotifications.sendMessageToWebhook(string, webhookUrl);
         } catch (IOException e) {
             System.err.println("Fehler beim Senden der Discord-Nachricht: " + e.getMessage());

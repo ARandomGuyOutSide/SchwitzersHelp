@@ -6,6 +6,10 @@
   "injectors": {
     "maxShiftBy": 5
   },
+  "mixins":
+  [
+    "gui.MixinGuiMainMenu"
+  ],
   "client": [
     "gui.MixinGuiMainMenu"
   ],

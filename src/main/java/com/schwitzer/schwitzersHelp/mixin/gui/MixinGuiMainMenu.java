@@ -17,14 +17,23 @@ public class MixinGuiMainMenu {
     @Final
     @Inject(method = "updateScreen", at = @At("RETURN"))
     private void initGui(CallbackInfo ci) {
+        System.out.println("DEBUG: checkedForUpdates = " + AutoUpdaterGUI.checkedForUpdates);
+
         if (!AutoUpdaterGUI.checkedForUpdates) {
             AutoUpdaterGUI.checkedForUpdates = true;
+            System.out.println("DEBUG: Calling getLatestVersion()");
             AutoUpdaterGUI.getLatestVersion();
+            System.out.println("DEBUG: isOutdated = " + AutoUpdaterGUI.isOutdated);
+            System.out.println("DEBUG: latestVersion = " + AutoUpdaterGUI.latestVersion);
+
             if (AutoUpdaterGUI.isOutdated) {
+                System.out.println("DEBUG: Showing GUI");
                 AutoUpdaterGUI.showGUI();
             }
         }
-        if (AutoUpdaterGUI.isOutdated)
-            this.splashText = "Update Farm Helper <3";
+
+        if (AutoUpdaterGUI.isOutdated) {
+            this.splashText = "Update SchwitzersHelp!"; // Fixed text
+        }
     }
 }
