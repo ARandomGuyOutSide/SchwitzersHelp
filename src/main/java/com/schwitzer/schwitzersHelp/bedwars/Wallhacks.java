@@ -70,7 +70,7 @@ public class Wallhacks {
 
         Minecraft mc = Minecraft.getMinecraft();
 
-        // Überprüfen, ob die Welt und der Spieler geladen sind
+
         if (mc.theWorld == null || mc.thePlayer == null) {
             return;
         }
