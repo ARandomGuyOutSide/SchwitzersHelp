@@ -73,8 +73,6 @@ public class Wallhacks {
 
         World world = Minecraft.getMinecraft().theWorld;
 
-        BedProtectionChecker bPC = new BedProtectionChecker(world);
-
         Minecraft mc = Minecraft.getMinecraft();
 
         // Überprüfen, ob die Welt und der Spieler geladen sind
