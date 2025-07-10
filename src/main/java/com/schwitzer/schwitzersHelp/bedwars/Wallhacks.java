@@ -68,11 +68,6 @@ public class Wallhacks {
         bat_esp = config.isBat_esp();
         bat_esp_color = config.getBat_esp_color();
 
-        //necron_boss_highlit = config.isNecron_boss_highlight();
-        //necron_esp_color = config.getNecron_esp_color();
-
-        World world = Minecraft.getMinecraft().theWorld;
-
         Minecraft mc = Minecraft.getMinecraft();
 
         // Überprüfen, ob die Welt und der Spieler geladen sind
