@@ -1,7 +1,9 @@
 package com.schwitzer.schwitzersHelp.util;
 
 import cc.polyfrost.oneconfig.config.core.OneColor;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,6 +15,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 
@@ -21,6 +24,43 @@ import static net.minecraft.client.gui.Gui.drawRect;
 public class RenderUtil {
 
     private static SchwitzerHelpConfig config = SchwitzerHelpConfig.getInstance();
+    private final static float lineThickness = 3.5f;
+
+
+    // Neue überladene drawLine() Methode für Coal Vein Linien
+    public static void drawLine(Vec3 end, OneColor lineColor) {
+        Vec3 start = new Vec3(0, Minecraft.getMinecraft().thePlayer.getEyeHeight(), 0);
+
+        // Debug: Farbe ausgeben
+        float[] color = getRenderColor(lineColor);
+
+        GlStateManager.pushMatrix();
+        GlStateManager.disableTexture2D();
+        GlStateManager.enableBlend();
+        GlStateManager.disableDepth();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.disableLighting(); // Wichtig! Lighting kann Farben überschreiben
+
+        // Farbe NACH den OpenGL-Zustandsänderungen setzen
+        GlStateManager.color(color[0], color[1], color[2], color[3]);
+
+        // Setze Linienbreite
+        GL11.glLineWidth(lineThickness);
+
+        // Zeichne die Linie
+        GL11.glBegin(GL11.GL_LINES);
+        GL11.glVertex3d(start.xCoord, start.yCoord, start.zCoord);
+        GL11.glVertex3d(end.xCoord, end.yCoord, end.zCoord);
+        GL11.glEnd();
+
+        // Setze die OpenGL-Einstellungen zurück
+        GlStateManager.enableLighting();
+        GlStateManager.enableDepth();
+        GlStateManager.disableBlend();
+        GlStateManager.enableTexture2D();
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F); // Farbe zurücksetzen
+        GlStateManager.popMatrix();
+    }
 
     private static float[] getRenderColor(OneColor baseColor) {
         if (config.isRainbow()) {
@@ -71,6 +111,24 @@ public class RenderUtil {
     }
 
     public static void drawBedBox(BlockPos pos, OneColor bed_ESP_color) {
+        IBlockState blockState = Minecraft.getMinecraft().theWorld.getBlockState(pos);
+        Block block = blockState.getBlock();
+
+        GlStateManager.pushMatrix();
+        GlStateManager.disableTexture2D();
+        GlStateManager.enableBlend();
+        GlStateManager.disableDepth();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+        if (!(block instanceof BlockBed)) {
+            return;
+        }
+
+        BlockBed.EnumPartType partType = blockState.getValue(BlockBed.PART);
+        boolean isFoot = partType == BlockBed.EnumPartType.FOOT;
+
+        if (!isFoot) return; // Only render for foot part
+
         double x = pos.getX();
         double y = pos.getY();
         double z = pos.getZ();
@@ -78,85 +136,105 @@ public class RenderUtil {
         float[] color = getRenderColor(bed_ESP_color);
         GlStateManager.color(color[0], color[1], color[2], color[3]);
 
-        BlockBed bedBlock = (BlockBed) Minecraft.getMinecraft().theWorld.getBlockState(pos).getBlock();
-        BlockBed.EnumPartType partType = Minecraft.getMinecraft().theWorld.getBlockState(pos).getValue(BlockBed.PART);
-        boolean isFoot = partType == BlockBed.EnumPartType.FOOT;
+        EnumFacing facing = blockState.getValue(BlockBed.FACING);
 
-        if (isFoot) {
-            EnumFacing facing = Minecraft.getMinecraft().theWorld.getBlockState(pos).getValue(BlockBed.FACING);
+        double width = 1.0D;
+        double height = 0.5625D;
+        double length = 2.0D;
 
-            double width = 1.0D;
-            double height = 1.0D;
-            double length = 2.0D;
+        double x1, z1, x2, z2;
 
-            double x1 = x;
-            double z1 = z;
-            double x2 = x;
-            double z2 = z;
-
-            switch (facing) {
-                case NORTH:
-                    x1 = x;
-                    z1 = z - 1;
-                    x2 = x + width;
-                    z2 = z + length - 1;
-                    break;
-                case SOUTH:
-                    x1 = x;
-                    z1 = z;
-                    x2 = x + width;
-                    z2 = z + length;
-                    break;
-                case WEST:
-                    x1 = x - 1;
-                    z1 = z;
-                    x2 = x + length - 1;
-                    z2 = z + width;
-                    break;
-                case EAST:
-                    x1 = x;
-                    z1 = z;
-                    x2 = x + length;
-                    z2 = z + width;
-                    break;
-            }
-
-            GL11.glBegin(GL11.GL_LINES);
-
-            GL11.glVertex3d(x1, y, z1);
-            GL11.glVertex3d(x2, y, z1);
-            GL11.glVertex3d(x2, y, z1);
-            GL11.glVertex3d(x2, y, z2);
-            GL11.glVertex3d(x2, y, z2);
-            GL11.glVertex3d(x1, y, z2);
-            GL11.glVertex3d(x1, y, z2);
-            GL11.glVertex3d(x1, y, z1);
-
-            GL11.glVertex3d(x1, y + height, z1);
-            GL11.glVertex3d(x2, y + height, z1);
-            GL11.glVertex3d(x2, y + height, z1);
-            GL11.glVertex3d(x2, y + height, z2);
-            GL11.glVertex3d(x2, y + height, z2);
-            GL11.glVertex3d(x1, y + height, z2);
-            GL11.glVertex3d(x1, y + height, z2);
-            GL11.glVertex3d(x1, y + height, z1);
-
-            GL11.glVertex3d(x1, y, z1);
-            GL11.glVertex3d(x1, y + height, z1);
-            GL11.glVertex3d(x2, y, z1);
-            GL11.glVertex3d(x2, y + height, z1);
-            GL11.glVertex3d(x2, y, z2);
-            GL11.glVertex3d(x2, y + height, z2);
-            GL11.glVertex3d(x1, y, z2);
-            GL11.glVertex3d(x1, y + height, z2);
-
-            GL11.glEnd();
+        switch (facing) {
+            case NORTH:
+                x1 = x;
+                z1 = z - 1;
+                x2 = x + width;
+                z2 = z + 1;
+                break;
+            case SOUTH:
+                x1 = x;
+                z1 = z;
+                x2 = x + width;
+                z2 = z + length;
+                break;
+            case WEST:
+                x1 = x - 1;
+                z1 = z;
+                x2 = x + 1;
+                z2 = z + width;
+                break;
+            case EAST:
+                x1 = x;
+                z1 = z;
+                x2 = x + length;
+                z2 = z + width;
+                break;
+            default:
+                return;
         }
+
+        // Set line width
+        GL11.glLineWidth(lineThickness);
+
+        // Draw the box
+        GL11.glBegin(GL11.GL_LINES);
+
+        // Bottom face
+        GL11.glVertex3d(x1, y, z1);
+        GL11.glVertex3d(x2, y, z1);
+        GL11.glVertex3d(x2, y, z1);
+        GL11.glVertex3d(x2, y, z2);
+        GL11.glVertex3d(x2, y, z2);
+        GL11.glVertex3d(x1, y, z2);
+        GL11.glVertex3d(x1, y, z2);
+        GL11.glVertex3d(x1, y, z1);
+
+        // Top face
+        GL11.glVertex3d(x1, y + height, z1);
+        GL11.glVertex3d(x2, y + height, z1);
+        GL11.glVertex3d(x2, y + height, z1);
+        GL11.glVertex3d(x2, y + height, z2);
+        GL11.glVertex3d(x2, y + height, z2);
+        GL11.glVertex3d(x1, y + height, z2);
+        GL11.glVertex3d(x1, y + height, z2);
+        GL11.glVertex3d(x1, y + height, z1);
+
+        // Vertical edges
+        GL11.glVertex3d(x1, y, z1);
+        GL11.glVertex3d(x1, y + height, z1);
+        GL11.glVertex3d(x2, y, z1);
+        GL11.glVertex3d(x2, y + height, z1);
+        GL11.glVertex3d(x2, y, z2);
+        GL11.glVertex3d(x2, y + height, z2);
+        GL11.glVertex3d(x1, y, z2);
+        GL11.glVertex3d(x1, y + height, z2);
+
+        GL11.glEnd();
+
+        // Reset OpenGL settings
+        GlStateManager.enableDepth();
+        GlStateManager.disableBlend();
+        GlStateManager.enableTexture2D();
+        GlStateManager.popMatrix();
     }
 
     public static void drawEntityBox(double x, double y, double z, double width, double height, OneColor color, double yOffset) {
         float[] col = getRenderColor(color);
+
+        // OpenGL-Zustand korrekt setzen
+        GlStateManager.pushMatrix();
+        GlStateManager.disableTexture2D();
+        GlStateManager.enableBlend();
+        GlStateManager.disableDepth();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.disableLighting();
+        GlStateManager.disableCull();
+
+        // Farbe setzen
         GlStateManager.color(col[0], col[1], col[2], col[3]);
+
+        // Linienbreite setzen
+        GL11.glLineWidth(lineThickness);
 
         GL11.glBegin(GL11.GL_LINES);
 
@@ -191,6 +269,15 @@ public class RenderUtil {
         GL11.glVertex3d(x - width, y + height + yOffset, z + width);
 
         GL11.glEnd();
+
+        // OpenGL-Zustand zurücksetzen
+        GlStateManager.enableCull();
+        GlStateManager.enableLighting();
+        GlStateManager.enableDepth();
+        GlStateManager.disableBlend();
+        GlStateManager.enableTexture2D();
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.popMatrix();
     }
 
     public static void drawFilledBox(AxisAlignedBB box, OneColor color) {
@@ -268,5 +355,63 @@ public class RenderUtil {
         GlStateManager.disableBlend();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.popMatrix();
+    }
+
+    /**
+     * Renders multiple custom blocks for ESP
+     * @param foundBlocks List of block positions to render
+     * @param renderPosX Camera X offset
+     * @param renderPosY Camera Y offset
+     * @param renderPosZ Camera Z offset
+     * @param color Color to render the blocks
+     */
+    public static void drawCustomBlocks(java.util.List<BlockPos> foundBlocks, double renderPosX, double renderPosY, double renderPosZ, OneColor color) {
+        if (foundBlocks == null || foundBlocks.isEmpty()) return;
+        
+        // Choose color based on config (rainbow or default)
+        float[] col = getRenderColor(color);
+        
+        // Render each found block
+        for (BlockPos pos : foundBlocks) {
+            AxisAlignedBB box = new AxisAlignedBB(
+                pos.getX() - renderPosX,
+                pos.getY() - renderPosY,
+                pos.getZ() - renderPosZ,
+                pos.getX() + 1 - renderPosX,
+                pos.getY() + 1 - renderPosY,
+                pos.getZ() + 1 - renderPosZ
+            );
+            drawFilledBox(box, col[0], col[1], col[2], col[3]);
+        }
+    }
+
+    /**
+     * Renders multiple entities with custom names for ESP
+     * @param entities List of entities to render
+     * @param camX Camera X position
+     * @param camY Camera Y position
+     * @param camZ Camera Z position
+     * @param color Color to render the entities
+     */
+    public static void drawCustomNamedEntities(java.util.List<net.minecraft.entity.EntityLivingBase> entities, double camX, double camY, double camZ, OneColor color) {
+        if (entities == null || entities.isEmpty()) return;
+        
+        // Choose color based on config (rainbow or default)
+        float[] renderColor = getRenderColor(color);
+        
+        Minecraft mc = Minecraft.getMinecraft();
+        
+        // Render each found entity
+        for (net.minecraft.entity.EntityLivingBase entity : entities) {
+            if (entity == null || entity.isDead || entity == mc.thePlayer) continue;
+
+            // Calculate relative position to camera
+            double relativeX = entity.posX - camX;
+            double relativeY = entity.posY - camY;
+            double relativeZ = entity.posZ - camZ;
+
+            // Render entity box
+            drawEntityBox(relativeX, relativeY, relativeZ, entity.width, entity.height, new OneColor(renderColor[0], renderColor[1],renderColor[2], renderColor[3]), 0.0D);
+        }
     }
 }

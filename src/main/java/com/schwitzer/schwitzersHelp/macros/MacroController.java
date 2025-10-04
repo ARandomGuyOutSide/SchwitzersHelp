@@ -8,7 +8,7 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.Chat;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -31,9 +31,8 @@ public class MacroController {
     // Verschiedene Macro-Instanzen
     private static GuildeAdvertisementMacro guildeAdvertisement = new GuildeAdvertisementMacro();
     private static CollectStashMacro collectStashMacro = new CollectStashMacro();
-    // Hier kannst du weitere Macros hinzufügen, z.B.:
-    // private static FishingMacro fishingMacro = new FishingMacro();
-    // private static MiningMacro miningMacro = new MiningMacro();
+    private static BazaarOrderMacro bazaarOrderMacro = new BazaarOrderMacro();
+    private static RevSlayerMacro revSlayerMacro = new RevSlayerMacro();
 
     // Lazy initialization der Macros
     private static void initializeMacros() {
@@ -43,6 +42,8 @@ public class MacroController {
             if (config != null) {
                 registerMacro(config.getGuildMacroKey(), guildeAdvertisement);
                 registerMacro(config.getStashMacroKey(), collectStashMacro);
+                registerMacro(config.getBazaarOrderingMacroKey(), bazaarOrderMacro);
+                registerMacro(config.getRevSlayerMacroKey(), revSlayerMacro);
 
                 initialized = true;
             }
@@ -63,14 +64,19 @@ public class MacroController {
 
         try {
             for (Map.Entry<OneKeyBind, Macro> entry : registeredMacros.entrySet()) {
+
                 OneKeyBind keyBind = entry.getKey();
                 Macro macro = entry.getValue();
 
                 if (keyBind != null && keyBind.isActive()) {
+                    if (macro == null) {
+                        return;
+                    }
                     handleMacroToggle(macro);
-                    break; // Nur ein Macro pro Tastendruck
+                    break;
                 }
             }
+
         } catch (Exception e) {
             System.err.println("Error in macro key press: " + e.getMessage());
             e.printStackTrace();
@@ -94,7 +100,7 @@ public class MacroController {
         macro.setState(MacroState.ENABLED);
         currentlyRunningMacro = macro;
 
-        Chat.formatedChatMessage(macro.getName() + " enabled");
+        ChatUtil.formatedChatMessage(macro.getName() + " enabled");
         macro.onEnable();
 
 
@@ -115,7 +121,7 @@ public class MacroController {
             currentlyRunningMacro = null;
         }
 
-        Chat.formatedChatMessage(macro.getName() + " disabled");
+        ChatUtil.formatedChatMessage(macro.getName() + " disabled");
         macro.onDisable();
 
         try {

@@ -1,5 +1,6 @@
 package com.schwitzer.schwitzersHelp.debug;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
@@ -15,19 +16,17 @@ import org.apache.logging.log4j.Logger;
 
 public class InventorySlots {
 
+    private static final SchwitzerHelpConfig config = SchwitzerHelpConfig.getInstance();
+
     private static final Logger LOGGER = LogManager.getLogger("InventoryLogger");
     private int tickCounter = 0;
     private final int TICK_INTERVAL = 40; // 40 ticks = 2 Sekunden (20 TPS)
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(this);
-        LOGGER.info("Inventory Logger Mod geladen!");
-    }
-
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
+
+        if(!config.isDebugMode()) return;
 
         Minecraft mc = Minecraft.getMinecraft();
         if (mc.thePlayer == null || mc.theWorld == null) return;
@@ -100,11 +99,16 @@ public class InventorySlots {
 
     private String getArmorSlotName(int armorSlot) {
         switch (armorSlot) {
-            case 0: return "Helm";
-            case 1: return "Brustpanzer";
-            case 2: return "Beinschutz";
-            case 3: return "Stiefel";
-            default: return "Unbekannt";
+            case 0:
+                return "Helm";
+            case 1:
+                return "Brustpanzer";
+            case 2:
+                return "Beinschutz";
+            case 3:
+                return "Stiefel";
+            default:
+                return "Unbekannt";
         }
     }
 }

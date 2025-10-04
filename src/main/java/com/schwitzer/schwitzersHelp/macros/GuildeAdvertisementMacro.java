@@ -6,7 +6,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.Chat;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -19,6 +19,7 @@ public class GuildeAdvertisementMacro implements Macro {
     private final String discordWebhook = config.getDiscordWebhook();
     private MacroController.MacroState macroControllerState = MacroController.MacroState.DISABLED;
     private MacroState currentState = MacroState.WAITING_AT_HUB;
+    private MacroState previousState = MacroState.DISABLED;
 
     // KORREKTUR: Separate Strings statt einem einzigen String mit Kommas
     private String[] locations = {"Hub", "End", "Forge", "Dungeon Hub"};
@@ -45,9 +46,20 @@ public class GuildeAdvertisementMacro implements Macro {
         WAITING_AT_HUB, WARPING, WAITING_AFTER_WARP, SENDING_CHAT_MESSAGE, SENDING_WEBHOOK, WAITING_10_MINUTES, DISABLED
     }
 
+    private void setState(MacroState newState) {
+        previousState = currentState;
+        currentState = newState;
+    }
+
+    private boolean isGuiOpen() {
+        Minecraft mc = Minecraft.getMinecraft();
+        return mc.currentScreen != null;
+    }
+
     @Override
     public void onEnable() {
         currentState = MacroState.WARPING;
+        previousState = MacroState.DISABLED;
         macroControllerState = MacroController.MacroState.ENABLED;
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -55,6 +67,7 @@ public class GuildeAdvertisementMacro implements Macro {
     @Override
     public void onDisable() {
         currentState = MacroState.DISABLED;
+        previousState = MacroState.DISABLED;
         macroControllerState = MacroController.MacroState.DISABLED;
         MinecraftForge.EVENT_BUS.unregister(this);
     }
@@ -93,6 +106,13 @@ public class GuildeAdvertisementMacro implements Macro {
 
         switch (currentState) {
             case WARPING:
+                // GUI-Check: Wenn eine GUI offen ist, warten bis sie geschlossen wird
+                if (isGuiOpen()) {
+                    // Warte bis GUI geschlossen ist, dann fortfahren
+                    tickcounter = 10; // Kurze Pause und erneut prüfen
+                    break;
+                }
+
                 // Überprüfe ob alle Locations verwendet wurden und leere die Liste
                 if (usedLocations.size() >= locations.length) {
                     usedLocations.clear();
@@ -111,29 +131,43 @@ public class GuildeAdvertisementMacro implements Macro {
 
                 switch (selectedLocation) {
                     case "Hub":
-                        Chat.sendMessage("/warp hub");
+                        ChatUtil.sendMessage("/warp hub");
                         break;
                     case "End":
-                        Chat.sendMessage("/warp end");
+                        ChatUtil.sendMessage("/warp end");
                         break;
                     case "Forge":
-                        Chat.sendMessage("/warp forge");
+                        ChatUtil.sendMessage("/warp forge");
                         break;
                     case "Dungeon Hub":
-                        Chat.sendMessage("/warp dungeon_hub");
+                        ChatUtil.sendMessage("/warp dungeon_hub");
                         break;
                 }
 
                 // Warte 3 Sekunden nach dem Warp-Befehl
                 tickcounter = 3 * 20; // 3 Sekunden = 60 Ticks
-                currentState = MacroState.WAITING_AFTER_WARP;
+                setState(MacroState.WAITING_AFTER_WARP);
                 break;
 
             case WAITING_AFTER_WARP:
-                currentState = MacroState.SENDING_CHAT_MESSAGE;
+                // GUI-Check: Wenn eine GUI offen ist, warten bis sie geschlossen wird
+                if (isGuiOpen()) {
+                    // Warte bis GUI geschlossen ist, dann fortfahren
+                    tickcounter = 10; // Kurze Pause und erneut prüfen
+                    break;
+                }
+
+                setState(MacroState.SENDING_CHAT_MESSAGE);
                 break;
 
             case SENDING_CHAT_MESSAGE:
+                // GUI-Check: Wenn eine GUI offen ist, warten bis sie geschlossen wird
+                if (isGuiOpen()) {
+                    // Warte bis GUI geschlossen ist, dann fortfahren
+                    tickcounter = 10; // Kurze Pause und erneut prüfen
+                    break;
+                }
+
                 // Überprüfe ob alle Messages verwendet wurden und leere die Liste
                 if (usedMessages.size() >= messages.length) {
                     usedMessages.clear();
@@ -151,11 +185,11 @@ public class GuildeAdvertisementMacro implements Macro {
                 currentMessage = selectedMessage;
 
                 // Sende die Message in den Chat
-                Chat.sendMessage(selectedMessage);
+                ChatUtil.sendMessage(selectedMessage);
 
                 // Kurze Pause vor dem Webhook
                 tickcounter = 2 * 20; // 2 Sekunden = 40 Ticks
-                currentState = MacroState.SENDING_WEBHOOK;
+                setState(MacroState.SENDING_WEBHOOK);
                 break;
 
             case SENDING_WEBHOOK:
@@ -166,12 +200,12 @@ public class GuildeAdvertisementMacro implements Macro {
 
                 // Warte 10 Minuten (600 Sekunden)
                 tickcounter = 600 * 20; // 10 Minuten = 12000 Ticks
-                currentState = MacroState.WAITING_10_MINUTES;
+                setState(MacroState.WAITING_10_MINUTES);
                 break;
 
             case WAITING_10_MINUTES:
                 // Nach 10 Minuten wieder von vorne beginnen
-                currentState = MacroState.WARPING;
+                setState(MacroState.WARPING);
                 break;
 
             case DISABLED:

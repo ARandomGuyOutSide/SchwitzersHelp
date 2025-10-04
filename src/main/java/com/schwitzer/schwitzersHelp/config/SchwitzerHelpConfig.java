@@ -18,12 +18,13 @@ public class SchwitzerHelpConfig extends Config {
     private static SchwitzerHelpConfig instance; // Singleton Instanz
 
     private static final transient String General = "General";
-    private static final transient String WallHacks = "Wall hacks stuff";
+    private static final transient String WallHacks = "Bedwars";
     private static final transient String Dungeons = "Dungeons";
     private static final transient String Mining = "Mining";
     private static final transient String Help = "Help";
     private static final transient String Minigames = "Minigames";
     private static final transient String Macros = "Macros";
+    private static final transient String Slayers = "Slayers";
     private static final transient String Guild = "Guild";
     private static final transient String Discord = "Discord";
 
@@ -34,7 +35,7 @@ public class SchwitzerHelpConfig extends Config {
     @Switch(name = "Rainbow mode", category = General, subcategory = "Blocks")
     public boolean rainbow = false;
 
-    @Switch(name = "Block ESP outline", category = General, subcategory = "Blocks")
+    @Switch(name = "Block Esp outline", category = General, subcategory = "Blocks")
     public boolean blockOutline = false;
 
     @Switch(name = "Debug mode", category = General, subcategory = "Debuging")
@@ -44,89 +45,101 @@ public class SchwitzerHelpConfig extends Config {
     public boolean funMode = true;
 
     @Switch(name = "Chat mention notification", category = General, subcategory = "QOL")
-    public boolean chatmention = true;
+    public boolean chatMention = true;
 
     @Number(name = "Titel duration (s)", category = General, min = 1, max = 10, subcategory = "QOL")
-    public int titelDuration = 3;
+    public int chatMentionTitleDuration = 3;
 
     //Bedwars
 
-    @VigilanceName(name = "Player ESP", category = WallHacks, subcategory = "Players")
-    @Switch(name = "Player ESP", category = WallHacks, subcategory = "Players")
-    public boolean entitiy_ESP = true;
+    @VigilanceName(name = "Bed wars", category = WallHacks, subcategory = "Players")
 
-    @VigilanceName(name = "Color", category = WallHacks, subcategory = "Players")
+    @Switch(name = "Player Esp", category = WallHacks, subcategory = "Players")
+    public boolean playerEsp = true;
+
     @Color(name = "Color", category = WallHacks, subcategory = "Players")
-    public OneColor player_ESP_color = new OneColor(0, 100, 100, 255);
+    public OneColor playerEspColor = new OneColor(0, 100, 100, 255);
 
-    @VigilanceName(name = "Player Lines", category = WallHacks, subcategory = "Players")
     @Switch(name = "Player Lines", category = WallHacks, subcategory = "Players")
-    public boolean player_lines = true;
+    public boolean playerLines = true;
 
-    @VigilanceName(name = "Color", category = WallHacks, subcategory = "Players")
     @Color(name = "Player Lines", category = WallHacks, subcategory = "Players")
-    public OneColor player_lines_color = new OneColor(320, 100, 100, 255);
+    public OneColor playerLinesColor = new OneColor(320, 100, 100, 255);
 
-    @VigilanceName(name = "Bed ESP", category = WallHacks, subcategory = "Bed ESP")
-    @Switch(name = "Bed ESP", category = WallHacks, subcategory = "Bed ESP")
-    public boolean bed_ESP = true;
+    @Switch(name = "Bed Esp", category = WallHacks, subcategory = "Bed Esp")
+    public boolean bedEsp = true;
 
-    @VigilanceName(name = "Color", category = WallHacks, subcategory = "Bed ESP")
-    @Color(name = "Bed Color", category = WallHacks, subcategory = "Bed ESP")
-    public OneColor bed_ESP_color = new OneColor(290, 100, 100, 255);
+    @Color(name = "Bed Color", category = WallHacks, subcategory = "Bed Esp")
+    public OneColor bedEspColor = new OneColor(290, 100, 100, 255);
 
     //Carneval
 
     //Dungeons
 
-    @VigilanceName(name = "Key Mob ESP", category = Dungeons, subcategory = "Mobs ESP")
+    @VigilanceName(name = "Key Mob Esp", category = Dungeons, subcategory = "Mobs Esp")
 
-    @Switch(name = "Key Mobs ESP", category = Dungeons, subcategory = "Mob ESP")
-    public boolean key_mob_esp = true;
+    @Switch(name = "Key Mobs Esp", category = Dungeons, subcategory = "Mob Esp")
+    public boolean keyMobEsp = true;
 
-    @Color(name = "Color of the Key Mob ESP", category = Dungeons, subcategory = "Mob ESP")
-    public OneColor key_mob_esp_color = new OneColor(50, 100, 100, 255);
+    @Color(name = "Color of the Key Mob Esp", category = Dungeons, subcategory = "Mob Esp")
+    public OneColor keyMobEspColor = new OneColor(50, 100, 100, 255);
 
-    @Switch(name = "Bat ESP", category = Dungeons, subcategory = "Mob ESP")
-    public boolean bat_esp = true;
+    @Switch(name = "Bat Esp", category = Dungeons, subcategory = "Mob Esp")
+    public boolean batEsp = true;
 
-    @Color(name = "Color of the Bat ESP", category = Dungeons, subcategory = "Mob ESP")
-    public OneColor bat_esp_color = new OneColor(50, 100, 100, 255);
+    @Color(name = "Color of the Bat Esp", category = Dungeons, subcategory = "Mob Esp")
+    public OneColor batEspColor = new OneColor(50, 100, 100, 255);
 
     @Switch(name = "Ghost Block", category = Dungeons, subcategory = "Ghost Block", size = 2)
-    public boolean make_ghost_block = false;
+    public boolean ghostBlock = false;
 
     @Slider(name = "Distance", category = Dungeons, subcategory = "Ghost Block", min = 1, max = 100)
-    public int ghost_block_distance = 5;
+    public int ghostBlockDistance = 5;
 
     @Slider(name = "Delay (ms)", category = Dungeons, subcategory = "Ghost Block", min = 0, max = 50)
-    public int ghost_block_delay = 5;
+    public int ghostBlockDelay = 5;
 
     @Switch(name = "Make Essence/Readstone Head Ghost Block", category = Dungeons, subcategory = "Ghost Block")
-    public boolean ghost_block_essence = true;
+    public boolean ghostBlockEssence = true;
+
+    @Switch(name = "Send leap message", category = Dungeons, subcategory = "Chat Stuff")
+    public boolean sendLeapMessage = true;
+
+    @Text(name = "Custom leap message", placeholder = "Leaped to ", multiline = false, category = Dungeons, subcategory = "Chat Stuff")
+    public String customLeapMessage = "";
+
+    @Switch(name = "Send saved message", description = "Send messages when you where saved by your bonzo/spirit mask or phonix pet", category = Dungeons, subcategory = "Chat Stuff", size = 2)
+    public boolean sendSavedMessage = true;
+
+    @Switch(name = "Shut Up Dungeons!", description = "Hides all messages received in dungeons", category = Dungeons, subcategory = "Chat Stuff")
+    public boolean shutUpDungeons;
+
+    @Switch(name = "Even Boss Shut Up!", description = "Hides even boss messages", category = Dungeons, subcategory = "Chat Stuff")
+    public boolean evenBossShutUp;
+
 
 
     // Mining
 
-    @VigilanceName(name = "Titanium ESP", category = Mining, subcategory = "Titanium ESP")
+    @VigilanceName(name = "Titanium Esp", category = Mining, subcategory = "Titanium Esp")
 
-    @Switch(name = "Titanium ESP", category = Mining, subcategory = "Titanium ESP")
+    @Switch(name = "Titanium Esp", category = Mining, subcategory = "Titanium Esp")
     public boolean scanForTitanium = true;
 
-    @Switch(name = "Coal ESP", category = Mining, subcategory = "Coal ESP")
-    public boolean coalESP = false;
+    @Switch(name = "Coal Esp", category = Mining, subcategory = "Coal Esp")
+    public boolean coalEsp = false;
 
-    @Slider(name = "Distance", category = Mining, subcategory = "Coal ESP", min = 1, max = 50)
-    public int coalESPRange = 5;
+    @Color(name = "Color of Coal Esp", category = Mining, subcategory = "Coal Esp")
+    public OneColor coalEspColor = new OneColor(50, 100, 100, 255);
 
-    @Color(name = "Color of Coal ESP", category = Mining, subcategory = "Coal ESP")
-    public OneColor coalESPColor = new OneColor(50, 100, 100, 255);
+    @Switch(name = "Best Coal Vein Line", category = Mining, subcategory = "Coal Esp")
+    public boolean coalVeinLine = false;
 
-    @Switch(name = "Pingless Hardstone", category = Mining, subcategory = "Crystal Hollows")
-    public boolean pinglessHardstone = false;
+    @Color(name = "Color of Line Esp", category = Mining, subcategory = "Coal Esp")
+    public OneColor coalEspLineColor = new OneColor(50, 100, 100, 255);
 
-    @Slider(name = "Packets per Second", category = Mining, subcategory = "Crystal Hollows", min = 1, max = 30)
-    public int packetsPerSecond = 10;
+    @Slider(name = "Distance", category = Mining, subcategory = "Coal Esp", min = 1, max = 50)
+    public int coalEspRange = 5;
 
     // Help
 
@@ -208,23 +221,37 @@ public class SchwitzerHelpConfig extends Config {
 
     @VigilanceName(name = "Minigames", category = Minigames, subcategory = "Minigames")
 
-    @Switch(name = "Zombies ESP", category = Minigames, subcategory = "Zombies")
-    public boolean zombie_esp = false;
+    @Switch(name = "ZombiesGame Esp", category = Minigames, subcategory = "Zombies")
+    public boolean zombieEsp = false;
 
-    @Color(name = "Zombies ESP Color", category = Minigames, subcategory = "Zombies")
+    @Color(name = "ZombiesGame Esp Color", category = Minigames, subcategory = "Zombies")
     public OneColor zombies_color = new OneColor(50, 100, 100, 255);
 
-    @Switch(name = "Dragon ESP", category = Minigames, subcategory = "Disasters")
-    public boolean dragon_esp = false;
+    @Switch(name = "Dragon Esp", category = Minigames, subcategory = "Disasters")
+    public boolean dragon_Esp = false;
 
-    @Color(name = "Dragon ESP Color", category = Minigames, subcategory = "Disasters")
-    public OneColor dragon_esp_color = new OneColor(50, 100, 100, 255);
+    @Color(name = "Dragon Esp Color", category = Minigames, subcategory = "Disasters")
+    public OneColor dragon_Esp_color = new OneColor(50, 100, 100, 255);
 
     @Switch(name = "Dragon Line", category = Minigames, subcategory = "Disasters")
-    public boolean dragon_line = false;
+    public boolean dragonLine = false;
 
     @Color(name = "Dragon Line Color", category = Minigames, subcategory = "Disasters")
-    public OneColor dragon_line_color = new OneColor(50, 100, 100, 255);
+    public OneColor dragonLineColor = new OneColor(50, 100, 100, 255);
+
+    // Slayers
+
+    @Switch(name = "Slayer Esp", category = Slayers, subcategory = "General")
+    public boolean slayerEsp;
+
+    @Color(name = "Slayer Esp Color", category = Slayers, subcategory = "General")
+    public OneColor slayerEspColor = new OneColor(50, 100, 100, 255);
+
+    @Switch(name = "Slayer carry mode", category = Slayers, subcategory = "General")
+    public boolean slayerCarryMode = false;
+
+    @Text(name = "Carry Name/s", category = Slayers, subcategory = "General")
+    public String slayerCarryNames;
 
     // Macros
 
@@ -236,8 +263,26 @@ public class SchwitzerHelpConfig extends Config {
     @KeyBind(name = "Macro Key", category = Macros, subcategory = "Stash Macro")
     public OneKeyBind stashMacroKey = new OneKeyBind();
 
-    @Dropdown(name = "Item variants", options = {"Enchanted Item", "Enchanted Item Block"}, category = Macros, subcategory = "Stash Macro")
-    public int itemVariantsOptions = 0;
+    @KeyBind(name = "Macro Key", category = Macros, subcategory = "Bazaar Ordering Macro")
+    public OneKeyBind bazaarOrderingMacroKey = new OneKeyBind();
+
+    @Dropdown(name = "Item place", options = {"Already in bazaar", "Sack"}, category = Macros, subcategory = "Bazaar Ordering Macro")
+    public int itemPlaceOption = 0;
+
+    @Switch(name = "Sell offer", category = Macros, subcategory = "Bazaar Ordering Macro")
+    public boolean sellOffer = false;
+
+    @Switch(name = "Custom price/s", category = Macros, subcategory = "Bazaar Ordering Macro")
+    public boolean customPrices = false;
+
+    @Text(name = "Item name/s", placeholder = "enchanted_coal;redstone", multiline = true, category = Macros, subcategory = "Bazaar Ordering Macro")
+    public String itemNames = "";
+
+    @Text(name = "Item price/s", placeholder = "1.3k;7", description = "Use in right order as item names!", multiline = true, category = Macros, subcategory = "Bazaar Ordering Macro")
+    public String itemPrices = "";
+
+    @KeyBind(name = "Rev Slayer Macro", category = Macros, subcategory = "Rev Slayer Macro")
+    public OneKeyBind revSlayerMacroKey = new OneKeyBind();
 
 
     // Guild
@@ -246,20 +291,67 @@ public class SchwitzerHelpConfig extends Config {
     @Switch(name = "Message on join", category = Guild, subcategory = "On Join")
     public boolean sendMessageOnGuildJoin = true;
 
+
+
     // Discord
 
     @VigilanceName(name = "Guild", category = Discord, subcategory = "Discord")
-    @Switch(name = "Send information to org.polyfrost.schwitzersHelp.discord webhook", category = Discord, subcategory = "Webhook")
+    @Switch(name = "Send information to discord webhook", category = Discord, subcategory = "Webhook")
     public boolean sendDiscordInformation = true;
 
     @Text(name = "Discord Webhook", category = Discord, subcategory = "Webhook", size = 2, placeholder = "Webhook")
     public String discordWebhook = "";
+
+    @Switch(name = "Auto Kick System", category = Guild, subcategory = "Auto Kick")
+    public boolean autoKickEnabled = false;
+
+    @Checkbox(name = "Monday", category = Guild, subcategory = "Auto Kick")
+    public boolean kickOnMonday = false;
+
+    @Checkbox(name = "Tuesday", category = Guild, subcategory = "Auto Kick")
+    public boolean kickOnTuesday = false;
+
+    @Checkbox(name = "Wednesday", category = Guild, subcategory = "Auto Kick")
+    public boolean kickOnWednesday = false;
+
+    @Checkbox(name = "Thursday", category = Guild, subcategory = "Auto Kick")
+    public boolean kickOnThursday = false;
+
+    @Checkbox(name = "Friday", category = Guild, subcategory = "Auto Kick")
+    public boolean kickOnFriday = false;
+
+    @Checkbox(name = "Saturday", category = Guild, subcategory = "Auto Kick")
+    public boolean kickOnSaturday = false;
+
+    @Checkbox(name = "Sunday", category = Guild, subcategory = "Auto Kick")
+    public boolean kickOnSunday = false;
+
 
     public SchwitzerHelpConfig() {
         super(new Mod("Schwitzers help", ModType.SKYBLOCK), "schwitzers_conf.json");
 
         // Initialisierung der Konfiguration
         initialize();
+
+        // Dependency's
+
+        // General
+        this.addDependency("chatMentionTitleDuration", "chatMention");
+
+        // Dungeons
+        this.addDependency("ghost_block_delay", "make_ghost_block");
+        this.addDependency("ghost_block_distance", "make_ghost_block");
+        this.addDependency("ghost_block_essence", "make_ghost_block");
+        this.addDependency("custom_leap_message", "send_leap_message");
+        this.addDependency("evenBossShutUp", "shutUpDungeons");
+
+        // Mining
+        this.addDependency("coalEspRange", "coalEsp");
+        this.addDependency("coalVeinLine", "coalEsp");
+        this.addDependency("packetsPerSecond", "pinglessHardstone");
+
+        // Macros
+        this.addDependency("itemPrices", "customPrices");
     }
 
     // Methode, um die einzige Instanz der Klasse zu erhalten
@@ -270,20 +362,40 @@ public class SchwitzerHelpConfig extends Config {
         return instance;
     }
 
+    public OneKeyBind getBazaarOrderingMacroKey() {
+        return bazaarOrderingMacroKey;
+    }
+
+    public String getItemPrices() {
+        return itemPrices;
+    }
+
+    public int getItemPlaceOption() {
+        return itemPlaceOption;
+    }
+
+    public boolean isSellOffer() {
+        return sellOffer;
+    }
+
+    public boolean isCoalVeinLine() {
+        return coalVeinLine;
+    }
+
+    public String getItemNames() {
+        return itemNames;
+    }
+
     public OneKeyBind getStashMacroKey() {
         return stashMacroKey;
     }
 
-    public int getTitelDuration() {
-        return titelDuration;
+    public int getChatMentionTitleDuration() {
+        return chatMentionTitleDuration;
     }
 
-    public int getItemVariantsOptions() {
-        return itemVariantsOptions;
-    }
-
-    public int getPacketsPerSecond() {
-        return packetsPerSecond;
+    public OneColor getCoalEspLineColor() {
+        return coalEspLineColor;
     }
 
     public boolean isFunMode() {
@@ -296,10 +408,6 @@ public class SchwitzerHelpConfig extends Config {
 
     public OneKeyBind getGuildMacroKey() {
         return guildMacroKey;
-    }
-
-    public boolean isPinglessHardstone() {
-        return pinglessHardstone;
     }
 
     public boolean isSendDiscordInformation() {
@@ -318,40 +426,52 @@ public class SchwitzerHelpConfig extends Config {
         return blockOutline;
     }
 
-    public boolean isEntitiy_ESP() {
-        return entitiy_ESP;
+    public boolean isPlayerEsp() {
+        return playerEsp;
     }
 
-    public boolean isBett_ESP() {
-        return bed_ESP;
+    public boolean isBedEsp() {
+        return bedEsp;
     }
 
-    public OneColor playerESP_color() {
-        return player_ESP_color;
+    public OneColor getPlayerEspColor() {
+        return playerEspColor;
     }
 
-    public OneColor getBed_ESP_color() {
-        return bed_ESP_color;
+    public boolean isSendLeapMessage() {
+        return sendLeapMessage;
     }
 
-    public boolean getKey_mob_esp() {
-        return key_mob_esp;
+    public String getCustomLeapMessage() {
+        return customLeapMessage;
     }
 
-    public OneColor getKey_mob_esp_color() {
-        return key_mob_esp_color;
+    public OneColor getBedEspColor() {
+        return bedEspColor;
     }
 
-    public boolean getPlayerLines() {
-        return player_lines;
+    public boolean isKeyMobEsp() {
+        return keyMobEsp;
     }
 
-    public OneColor getPlayer_lines_color() {
-        return player_lines_color;
+    public OneColor getKeyMobEspColor() {
+        return keyMobEspColor;
+    }
+
+    public boolean isPlayerLines() {
+        return playerLines;
+    }
+
+    public OneColor getPlayerLinesColor() {
+        return playerLinesColor;
     }
 
     public boolean isScanForTitanium() {
         return scanForTitanium;
+    }
+
+    public boolean isSlayerEsp() {
+        return slayerEsp;
     }
 
     public boolean isModify_movementspeed() {
@@ -368,6 +488,22 @@ public class SchwitzerHelpConfig extends Config {
 
     public boolean isFly() {
         return fly;
+    }
+
+    public boolean isSlayerCarryMode() {
+        return slayerCarryMode;
+    }
+
+    public boolean isEvenBossShutUp() {
+        return evenBossShutUp;
+    }
+
+    public boolean isSendSavedMessage() {
+        return sendSavedMessage;
+    }
+
+    public String getSlayerCarryNames() {
+        return slayerCarryNames;
     }
 
     public boolean isNoFall() {
@@ -398,52 +534,66 @@ public class SchwitzerHelpConfig extends Config {
         return safeWalk;
     }
 
-    public boolean isZombie_esp() {
-        return zombie_esp;
+    public boolean isZombieGameEsp() {
+        return zombieEsp;
     }
 
-    public OneColor getZombies_color() {
+    public OneColor getSlayerEspColor() {
+        return slayerEspColor;
+    }
+
+    public OneColor getZombiesGameColor() {
         return zombies_color;
     }
 
-    public boolean isDragon_esp() {
-        return dragon_esp;
+    public boolean isChaosDragonEsp() {
+        return dragon_Esp;
     }
 
-    public OneColor getDragon_esp_color() {
-        return dragon_esp_color;
+    public boolean isShutUpDungeons() {
+        return shutUpDungeons;
     }
 
-    public boolean isDragon_line() {
-        return dragon_line;
+    public OneColor getChaosDragonEspColor() {
+        return dragon_Esp_color;
     }
 
-    public OneColor getDragon_line_color() {
-        return dragon_line_color;
+    public boolean isDragonline() {
+        return dragonLine;
+    }
+
+    public OneColor getDragonLineColor() {
+        return dragonLineColor;
     }
 
     public boolean isGhost_block() {
-        return make_ghost_block;
+        return ghostBlock;
     }
 
-    public int getGhost_block_distance() {
-        return ghost_block_distance;
+    public int getGhostBlockDistance() {
+        return ghostBlockDistance;
     }
 
     public boolean isAim_Assist() {
         return aim_assist;
     }
 
+    public boolean isCustomPrices() {
+        return customPrices;
+    }
+
+    public OneKeyBind getRevSlayerMacroKey() {return revSlayerMacroKey;}
+
     public int getAimAssistSpeed() {
         return aim_assist_speed;
     }
 
-    public int getGhost_block_delay() {
-        return ghost_block_delay;
+    public int getGhostBlockDelay() {
+        return ghostBlockDelay;
     }
 
-    public boolean isGhost_block_essence() {
-        return ghost_block_essence;
+    public boolean isGhostBlockEssence() {
+        return ghostBlockEssence;
     }
 
     public int getAimAssistDistance() {
@@ -454,8 +604,8 @@ public class SchwitzerHelpConfig extends Config {
         return aim_assist_fov;
     }
 
-    public boolean isChatmention() {
-        return chatmention;
+    public boolean isChatMention() {
+        return chatMention;
     }
 
     public boolean isShow_circle() {
@@ -466,28 +616,28 @@ public class SchwitzerHelpConfig extends Config {
         return blatant_mode;
     }
 
-    public boolean isCoalESP() {
-        return coalESP;
+    public boolean isCoalEsp() {
+        return coalEsp;
     }
 
-    public boolean isBat_esp() {
-        return bat_esp;
+    public boolean isBatEsp() {
+        return batEsp;
     }
 
-    public OneColor getBat_esp_color() {
-        return bat_esp_color;
+    public OneColor getBatEspColor() {
+        return batEspColor;
     }
 
-    public OneColor getCoalESPColor() {
-        return coalESPColor;
+    public OneColor getCoalEspColor() {
+        return coalEspColor;
     }
 
     public boolean isRainbow() {
         return rainbow;
     }
 
-    public int getCoalESPRange() {
-        return coalESPRange;
+    public int getCoalEspRange() {
+        return coalEspRange;
     }
 
     public boolean isAim_invis() {
@@ -504,6 +654,34 @@ public class SchwitzerHelpConfig extends Config {
 
     public boolean isIgnore_friends() {
         return ignore_friends;
+    }
+
+    public boolean isKickOnMonday() {
+        return kickOnMonday;
+    }
+
+    public boolean isKickOnTuesday() {
+        return kickOnTuesday;
+    }
+
+    public boolean isKickOnWednesday() {
+        return kickOnWednesday;
+    }
+
+    public boolean isKickOnThursday() {
+        return kickOnThursday;
+    }
+
+    public boolean isKickOnFriday() {
+        return kickOnFriday;
+    }
+
+    public boolean isKickOnSaturday() {
+        return kickOnSaturday;
+    }
+
+    public boolean isKickOnSunday() {
+        return kickOnSunday;
     }
 }
 

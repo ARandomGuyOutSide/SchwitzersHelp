@@ -1,4 +1,4 @@
-package com.schwitzer.schwitzersHelp.DungeonsStuff;
+package com.schwitzer.schwitzersHelp.dungeon;
 
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.init.Blocks;
@@ -28,14 +28,14 @@ public class GhostBlock {
             if (mc.thePlayer == null || mc.theWorld == null)
                 return;
 
-            int delay = config.getGhost_block_delay();
+            int delay = config.getGhostBlockDelay();
             long currentTime = System.currentTimeMillis();
 
             if (mc.gameSettings.keyBindUseItem.isKeyDown()
                     && mc.thePlayer.getHeldItem() != null
                     && mc.thePlayer.getHeldItem().getItem() instanceof ItemPickaxe) {
 
-                MovingObjectPosition mop = mc.thePlayer.rayTrace(config.getGhost_block_distance(), 1.0F);
+                MovingObjectPosition mop = mc.thePlayer.rayTrace(config.getGhostBlockDistance(), 1.0F);
 
                 if (mop != null && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                     // Only create ghost block if enough time has passed
@@ -51,7 +51,7 @@ public class GhostBlock {
                         }
 
                         // Check if the block is a wither essence skull
-                        if (config.isGhost_block_essence()) {
+                        if (config.isGhostBlockEssence()) {
                             if (block == Blocks.skull) {
                                 TileEntitySkull tileEntitySkull = (TileEntitySkull) worldClient.getTileEntity(pos);
                                 if (tileEntitySkull != null && tileEntitySkull.getPlayerProfile() != null &&

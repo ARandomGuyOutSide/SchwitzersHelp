@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.Chat;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
 
 public class DisconnectWhenISayIt {
 
@@ -61,7 +61,7 @@ public class DisconnectWhenISayIt {
                 responseMessage = "ok chef";
             }
 
-            Chat.sendMessage(responseMessage);
+            ChatUtil.sendMessage(responseMessage);
 
             new Thread(() -> {
                 try {

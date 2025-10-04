@@ -1,9 +1,9 @@
 package com.schwitzer.schwitzersHelp.features;
 
+import com.schwitzer.schwitzersHelp.discord.DiscordNotifications;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
+import com.schwitzer.schwitzersHelp.util.GuiUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
@@ -11,24 +11,13 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.Timer;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class PlayerMentionedInChat {
     private final SchwitzerHelpConfig config = SchwitzerHelpConfig.getInstance();
     private Minecraft mc = Minecraft.getMinecraft();
-    private static String title = "";
-    private static int timer = 0;
-    private static float scale = 2.0f;
-    private static Color color = Color.WHITE;
-
-    public static void showTitle(String text, int durationTicks, float scaleValue, Color textColor) {
-        title = text;
-        timer = durationTicks;
-        scale = scaleValue;
-        color = textColor;
-    }
 
     @SubscribeEvent
     public void onTick(TickEvent.PlayerTickEvent event)
@@ -38,36 +27,20 @@ public class PlayerMentionedInChat {
 
         Minecraft mc = Minecraft.getMinecraft();
         if (mc.thePlayer == null || mc.theWorld == null) return;
-
-        if (timer > 0) {
-            timer--;
-        }
     }
 
     @SubscribeEvent
     public void onRender(RenderGameOverlayEvent.Text event) {
-        if (timer > 0 && !title.isEmpty()) {
-            ScaledResolution res = new ScaledResolution(mc);
-            FontRenderer fr = mc.fontRendererObj;
-
-            GlStateManager.pushMatrix();
-            GlStateManager.translate(res.getScaledWidth() / 2f, res.getScaledHeight() / 4f, 0);
-            GlStateManager.scale(scale, scale, scale);
-
-            int x = -fr.getStringWidth(title) / 2;
-            fr.drawStringWithShadow(title, x, 0, color.getRGB());
-
-            GlStateManager.popMatrix();
-        }
+        GuiUtil.renderTitle();
     }
 
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event)
     {
-        if(!config.isChatmention()) return;
+        if(!config.isChatMention()) return;
 
         String username = mc.thePlayer.getName();
-        String message = event.message.getUnformattedText();
+        String message = event.message.getFormattedText();
 
         // Check if @username is in the message
         if (message.contains("@" + username)) {
@@ -77,14 +50,22 @@ public class PlayerMentionedInChat {
                     EnumChatFormatting.RED + "@" + username + EnumChatFormatting.RESET
             );
 
+            if(config.isSendDiscordInformation())
+            {
+                try {
+                    DiscordNotifications.sendEmbedToWebhook("@everyone You have been mentioned in chat", ChatUtil.removeColorCodes(message), 65280, config.getDiscordWebhook());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
             // Ursprüngliche Nachricht blockieren
             event.setCanceled(true);
 
             // Neue, formatierte Nachricht in Chat einfügen
             mc.thePlayer.addChatMessage(new ChatComponentText(formattedMessage));
 
-            // Titel anzeigen mit der korrekten Client-Methode
-            showTitle("You have been mentioned in chat", Timer.secondsToTicks(config.getTitelDuration()), 2.5f, Color.RED);
+            GuiUtil.drawTitle("You have been mentioned in chat", config.getChatMentionTitleDuration() * 1000, 2.5f, Color.RED);
         }
     }
 }

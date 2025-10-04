@@ -26,6 +26,8 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.schwitzer.schwitzersHelp.SchwitzersHelp.VERSION;
+
 /*
     Credits to Yuro for this superb class from FarmHelperV2
 */
@@ -52,7 +54,7 @@ public class AutoUpdaterGUI extends GuiScreen {
     private GuiButton downloadBtn;
     private GuiButton closeBtn;
     private ScrollableList scrollableList;
-    static Pattern versionPattern = Pattern.compile("(\\d+\\.\\d+\\.\\d+)(?:-(pre(\\d*))?)?");
+    static Pattern versionPattern = Pattern.compile("(\\d+\\.\\d+(?:\\.\\d+)?)(?:-(pre(\\d*))?)?");
 
     public AutoUpdaterGUI() {
         super();
@@ -196,51 +198,73 @@ public class AutoUpdaterGUI extends GuiScreen {
         return list;
     }
 
+    // Then modify the isOutdated method to use this:
     private static boolean isOutdated() {
+        System.out.println("DEBUG: Checking if outdated");
+        System.out.println("DEBUG: latestVersion = '" + latestVersion + "'");
+
+        String currentVersion = SchwitzersHelp.getCurrentVersion(); // Use the new method
+        System.out.println("DEBUG: Current version = '" + currentVersion + "'");
+
         Matcher latestVersionMatcher = versionPattern.matcher(latestVersion);
-        Matcher currentVersionMatcher = versionPattern.matcher(SchwitzersHelp.VERSION);
+        Matcher currentVersionMatcher = versionPattern.matcher(currentVersion); // Use currentVersion instead
 
         if (!latestVersionMatcher.find() || latestVersionMatcher.group(1) == null || latestVersionMatcher.group(1).isEmpty()) {
-            System.out.println("Failed to parse latest version.");
+            System.out.println("DEBUG: Failed to parse latest version: " + latestVersion);
             return false;
         }
         if (!currentVersionMatcher.find() || currentVersionMatcher.group(1) == null || currentVersionMatcher.group(1).isEmpty()) {
-            System.out.println("Failed to parse current version.");
+            System.out.println("DEBUG: Failed to parse current version: " + currentVersion);
             return false;
         }
-        int latestPre = 0; // -pre version
+
+        System.out.println("DEBUG: Latest version parsed: " + latestVersionMatcher.group(1));
+        System.out.println("DEBUG: Current version parsed: " + currentVersionMatcher.group(1));
+
+        int latestPre = 0;
         if (latestVersionMatcher.group(2) == null || latestVersionMatcher.group(2).isEmpty())
-            latestPre = 1337; // without -pre version (full release)
+            latestPre = 1337;
         if (latestVersionMatcher.group(3) != null && !latestVersionMatcher.group(3).isEmpty())
-            latestPre = Integer.parseInt(latestVersionMatcher.group(3)); // -preX version
+            latestPre = Integer.parseInt(latestVersionMatcher.group(3));
 
-        int currentPre = 0; // -pre version
+        int currentPre = 0;
         if (currentVersionMatcher.group(2) == null || currentVersionMatcher.group(2).isEmpty())
-            currentPre = 1337; // without -pre version (full release)
+            currentPre = 1337;
         if (currentVersionMatcher.group(3) != null && !currentVersionMatcher.group(3).isEmpty())
-            currentPre = Integer.parseInt(currentVersionMatcher.group(3)); // -preX version
+            currentPre = Integer.parseInt(currentVersionMatcher.group(3));
 
-        if (compareSymVer(latestVersionMatcher.group(1)) > 0)
+        System.out.println("DEBUG: Latest pre: " + latestPre + ", Current pre: " + currentPre);
+
+        int versionComparison = compareSymVer(latestVersionMatcher.group(1), currentVersionMatcher.group(1));
+        System.out.println("DEBUG: Version comparison result: " + versionComparison);
+
+        if (versionComparison > 0) {
+            System.out.println("DEBUG: Latest version is newer");
             return true;
-        else if (compareSymVer(latestVersionMatcher.group(1)) == 0)
+        } else if (versionComparison == 0) {
+            System.out.println("DEBUG: Same version, checking pre-release");
             return latestPre > currentPre;
+        }
 
+        System.out.println("DEBUG: Current version is newer or same");
         return false;
     }
 
-    private static int compareSymVer(String latestVersion) {
-        Matcher currentMatcher = versionPattern.matcher(SchwitzersHelp.VERSION);
-
-        if (!currentMatcher.find()) {
-            return 0;
-        }
+    // Also update compareSymVer to accept the current version as parameter
+    private static int compareSymVer(String latestVersion, String currentVersion) {
+        System.out.println("DEBUG: compareSymVer - comparing '" + latestVersion + "' with '" + currentVersion + "'");
 
         String[] parts1 = latestVersion.split("\\.");
-        String[] parts2 = currentMatcher.group(1).split("\\.");
+        String[] parts2 = currentVersion.split("\\.");
+
+        System.out.println("DEBUG: Latest parts: " + Arrays.toString(parts1));
+        System.out.println("DEBUG: Current parts: " + Arrays.toString(parts2));
 
         for (int i = 0; i < Math.min(parts1.length, parts2.length); i++) {
             int part1 = Integer.parseInt(parts1[i]);
             int part2 = Integer.parseInt(parts2[i]);
+
+            System.out.println("DEBUG: Comparing part " + i + ": " + part1 + " vs " + part2);
 
             if (part1 < part2) {
                 return -1;
@@ -262,7 +286,7 @@ public class AutoUpdaterGUI extends GuiScreen {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             File currentModsFolder = SchwitzersHelp.jarFile.getParentFile();
             File[] filesToDelete = currentModsFolder.listFiles(
-                    (dir, name) -> name.toLowerCase().startsWith("SchwitzersHelp") && !name.toLowerCase().contains("jda") && !name.toLowerCase().contains(latestVersion));
+                    (dir, name) -> name.toLowerCase().startsWith("schwitzershelp") && !name.toLowerCase().contains(latestVersion));
             if (filesToDelete != null) {
                 for (File fileToDelete : filesToDelete) {
                     if (SystemUtils.IS_OS_WINDOWS) {
@@ -276,9 +300,10 @@ public class AutoUpdaterGUI extends GuiScreen {
                     }
                 }
             }
-        }, "SchwitzersHelpV2-Delete-Old-Files"));
+        }, "SchwitzersHelp-Delete-Old-Files"));
         mc.shutdown();
     }
+
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {

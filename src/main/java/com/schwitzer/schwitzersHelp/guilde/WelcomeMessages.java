@@ -5,8 +5,8 @@ import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.Chat;
-import com.schwitzer.schwitzersHelp.util.Timer;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
+import com.schwitzer.schwitzersHelp.util.TimerUtil;
 
 public class WelcomeMessages {
 
@@ -23,7 +23,7 @@ public class WelcomeMessages {
             tickcounter--;
 
             if (tickcounter <= 0 && pendingPlayerName != null) {
-                Chat.sendMessage("/gc Willkommen " + pendingPlayerName + " in der GooDz Gilde! h/");
+                ChatUtil.sendMessage("/gc Willkommen " + pendingPlayerName + " in der GooDz Gilde! h/");
                 pendingPlayerName = null;
             }
         }
@@ -47,11 +47,11 @@ public class WelcomeMessages {
                         name = data[1];
 
 
-                    Chat.debugMessage(message);
-                    Chat.debugMessage("name : " + name);
+                    ChatUtil.debugMessage(message);
+                    ChatUtil.debugMessage("name : " + name);
 
                     // Timer starten (5 Sekunden)
-                    tickcounter = Timer.secondsToTicks(5);
+                    tickcounter = TimerUtil.secondsToTicks(5);
                     pendingPlayerName = name;
                 }
             }

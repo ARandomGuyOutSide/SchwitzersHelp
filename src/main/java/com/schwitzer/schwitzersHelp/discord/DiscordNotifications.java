@@ -2,7 +2,7 @@ package com.schwitzer.schwitzersHelp.discord;
 
 import net.minecraft.client.Minecraft;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.Chat;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -42,8 +42,8 @@ public class DiscordNotifications {
         if (responseCode == 204) {
             if(Minecraft.getMinecraft().theWorld != null)
             {
-                Chat.debugMessage("Discord-Nachricht erfolgreich gesendet!");
-                Chat.sendMessage("Send message to org.polyfrost.schwitzersHelp.discord webhook");
+                ChatUtil.debugMessage("Discord-Nachricht erfolgreich gesendet!");
+                ChatUtil.sendMessage("Send message to org.polyfrost.schwitzersHelp.discord webhook");
             }
         } else {
             System.out.println("Fehler beim Senden der Discord-Nachricht: " + responseCode);

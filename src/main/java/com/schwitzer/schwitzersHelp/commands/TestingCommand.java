@@ -1,14 +1,13 @@
 package com.schwitzer.schwitzersHelp.commands;
 
-import com.schwitzer.schwitzersHelp.discord.DiscordNotifications;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
+import com.schwitzer.schwitzersHelp.util.InventoryUtil;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 
-import java.io.IOException;
-
-public class DiscordCommand extends CommandBase {
+public class TestingCommand extends CommandBase {
 
     private final SchwitzerHelpConfig config = SchwitzerHelpConfig.getInstance();
 
@@ -18,7 +17,7 @@ public class DiscordCommand extends CommandBase {
 
     @Override
     public String getCommandName() {
-        return "discord";
+        return "test";
     }
 
     @Override
@@ -30,18 +29,10 @@ public class DiscordCommand extends CommandBase {
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         if (args.length == 0) return;
 
-        String message = "";
+        String message = "The output of the test : ";
 
-        for (String arg : args) {
-            message += arg + " ";
-        }
+        message += InventoryUtil.isItemInInventory(args[0]);
 
-        try {
-            DiscordNotifications.sendMessageToWebhook(message, config.getDiscordWebhook());
-            DiscordNotifications.sendEmbedToWebhook("Test", message, 65280, config.getDiscordWebhook());
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ChatUtil.formatedChatMessage(message);
     }
 }
