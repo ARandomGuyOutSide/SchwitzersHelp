@@ -1,22 +1,17 @@
 package com.schwitzer.schwitzersHelp;
 
 import com.schwitzer.schwitzersHelp.bedwars.BedWarsEsp;
+import com.schwitzer.schwitzersHelp.bedwars.PlayerLinesMod;
 import com.schwitzer.schwitzersHelp.commands.*;
-import com.schwitzer.schwitzersHelp.commands.CustomNameToESPCommand;
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
+import com.schwitzer.schwitzersHelp.debug.InventorySlots;
 import com.schwitzer.schwitzersHelp.dungeon.DungeonEsp;
 import com.schwitzer.schwitzersHelp.dungeon.GhostBlock;
-import com.schwitzer.schwitzersHelp.bedwars.PlayerLinesMod;
-import com.schwitzer.schwitzersHelp.debug.InventorySlots;
 import com.schwitzer.schwitzersHelp.dungeon.InformTeammatesInChat;
 import com.schwitzer.schwitzersHelp.dungeon.ShutUpDungeons;
 import com.schwitzer.schwitzersHelp.failsaves.BazaarFailsaves;
 import com.schwitzer.schwitzersHelp.failsaves.Worldchange;
-import com.schwitzer.schwitzersHelp.features.CustomBlockEsp;
-import com.schwitzer.schwitzersHelp.features.CustomNameEsp;
-import com.schwitzer.schwitzersHelp.features.DisconnectWhenISayIt;
-import com.schwitzer.schwitzersHelp.features.MovePlayer;
-import com.schwitzer.schwitzersHelp.features.PlaceBlocksOnCommand;
-import com.schwitzer.schwitzersHelp.features.PlayerMentionedInChat;
+import com.schwitzer.schwitzersHelp.features.*;
 import com.schwitzer.schwitzersHelp.guilde.AutoKick;
 import com.schwitzer.schwitzersHelp.guilde.WelcomeMessages;
 import com.schwitzer.schwitzersHelp.helpStuff.*;
@@ -31,12 +26,11 @@ import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
 
-@Mod(modid = "schwitzershelp", name = "Schwitzers Help", version = "0.07")
+@Mod(modid = "schwitzershelp", name = "Schwitzers Help", version = "1.07")
 public class SchwitzersHelp {
     public static final String VERSION = "%%VERSION%%";
     public static File jarFile = null;

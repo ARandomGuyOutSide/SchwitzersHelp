@@ -1,6 +1,8 @@
 package com.schwitzer.schwitzersHelp.mining;
 
 import cc.polyfrost.oneconfig.config.core.OneColor;
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
+import com.schwitzer.schwitzersHelp.util.RenderUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,8 +13,6 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.RenderUtil;
 
 import java.util.*;
 

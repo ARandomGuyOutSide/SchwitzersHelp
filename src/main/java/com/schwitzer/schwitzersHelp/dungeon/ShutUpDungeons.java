@@ -6,7 +6,6 @@ import com.schwitzer.schwitzersHelp.util.ScoreboardUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tv.twitch.chat.Chat;
 
 public class ShutUpDungeons {
     private static final SchwitzerHelpConfig cofing = SchwitzerHelpConfig.getInstance();

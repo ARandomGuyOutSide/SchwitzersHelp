@@ -1,5 +1,6 @@
 package com.schwitzer.schwitzersHelp.helpStuff;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,7 +10,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 
 import java.util.List;
 import java.util.Random;

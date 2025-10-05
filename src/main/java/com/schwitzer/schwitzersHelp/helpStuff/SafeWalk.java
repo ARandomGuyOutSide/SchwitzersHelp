@@ -1,5 +1,6 @@
 package com.schwitzer.schwitzersHelp.helpStuff;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
@@ -7,7 +8,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 
 public class SafeWalk {
 

@@ -1,10 +1,10 @@
 package com.schwitzer.schwitzersHelp.features;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.ChatUtil;
 
 public class DisconnectWhenISayIt {
 

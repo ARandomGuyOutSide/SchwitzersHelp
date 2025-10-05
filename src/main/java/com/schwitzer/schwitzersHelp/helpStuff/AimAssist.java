@@ -1,16 +1,17 @@
 package com.schwitzer.schwitzersHelp.helpStuff;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.lwjgl.input.Mouse;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,14 +1,14 @@
 package com.schwitzer.schwitzersHelp.macros;
 
 import cc.polyfrost.oneconfig.config.core.OneKeyBind;
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import com.schwitzer.schwitzersHelp.discord.DiscordNotifications;
 import com.schwitzer.schwitzersHelp.features.MouseUngrab;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.ChatUtil;
 
 import java.io.IOException;
 import java.util.HashMap;

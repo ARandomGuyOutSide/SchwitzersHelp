@@ -1,16 +1,16 @@
 package com.schwitzer.schwitzersHelp.dungeon;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
+import net.minecraft.tileentity.TileEntitySkull;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.BlockPos;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import net.minecraft.block.Block;
-import net.minecraft.tileentity.TileEntitySkull;
 
 public class GhostBlock {
     private static final String WITHER_ESSENCE_ID = "e0f3e929-869e-3dca-9504-54c666ee6f23";

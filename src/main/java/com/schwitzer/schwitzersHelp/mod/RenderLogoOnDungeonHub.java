@@ -1,7 +1,6 @@
 package com.schwitzer.schwitzersHelp.mod;
 
 import com.schwitzer.schwitzersHelp.util.ScoreboardUtil;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;

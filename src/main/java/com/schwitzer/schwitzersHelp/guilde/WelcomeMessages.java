@@ -1,12 +1,12 @@
 package com.schwitzer.schwitzersHelp.guilde;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
+import com.schwitzer.schwitzersHelp.util.TimerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.ChatUtil;
-import com.schwitzer.schwitzersHelp.util.TimerUtil;
 
 public class WelcomeMessages {
 

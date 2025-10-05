@@ -1,17 +1,14 @@
 package com.schwitzer.schwitzersHelp.macros;
 
-import cc.polyfrost.oneconfig.config.annotations.KeyBind;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import com.schwitzer.schwitzersHelp.features.MovePlayer;
 import com.schwitzer.schwitzersHelp.util.*;
-import jdk.nashorn.internal.ir.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;

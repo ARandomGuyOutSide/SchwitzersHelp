@@ -2,15 +2,10 @@ package com.schwitzer.schwitzersHelp.util;
 
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import net.minecraft.client.Minecraft;
+import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.Team;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StringUtils;
-import org.apache.logging.log4j.LogManager;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;

@@ -1,8 +1,8 @@
 package com.schwitzer.schwitzersHelp.discord;
 
-import net.minecraft.client.Minecraft;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import com.schwitzer.schwitzersHelp.util.ChatUtil;
+import net.minecraft.client.Minecraft;
 
 import java.io.*;
 import java.net.HttpURLConnection;

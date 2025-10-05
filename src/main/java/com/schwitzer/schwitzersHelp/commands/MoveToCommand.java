@@ -7,8 +7,6 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
 
-import java.util.List;
-
 public class MoveToCommand extends CommandBase {
 
     @Override

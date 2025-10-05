@@ -1,5 +1,6 @@
 package com.schwitzer.schwitzersHelp.features;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import com.schwitzer.schwitzersHelp.discord.DiscordNotifications;
 import com.schwitzer.schwitzersHelp.util.ChatUtil;
 import com.schwitzer.schwitzersHelp.util.GuiUtil;
@@ -10,7 +11,6 @@ import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 
 import java.awt.*;
 import java.io.IOException;

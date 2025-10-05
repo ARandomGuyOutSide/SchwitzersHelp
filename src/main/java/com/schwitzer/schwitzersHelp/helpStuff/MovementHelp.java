@@ -1,11 +1,11 @@
 package com.schwitzer.schwitzersHelp.helpStuff;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 
 @Mod(modid = "helpStuff", name = "Cheats", version = "1.0")
 public class MovementHelp {

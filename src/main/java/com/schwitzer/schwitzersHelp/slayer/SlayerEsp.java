@@ -2,27 +2,15 @@ package com.schwitzer.schwitzersHelp.slayer;
 
 import cc.polyfrost.oneconfig.config.core.OneColor;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.ChatUtil;
 import com.schwitzer.schwitzersHelp.util.EntityUtil;
 import com.schwitzer.schwitzersHelp.util.RenderUtil;
-import com.schwitzer.schwitzersHelp.util.RotatePlayerTo;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityArmorStand;
-import net.minecraft.entity.monster.EntityBlaze;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityWolf;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class SlayerEsp {

@@ -5,13 +5,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.schwitzer.schwitzersHelp.SchwitzersHelp;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import org.apache.commons.lang3.SystemUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-
-import com.schwitzer.schwitzersHelp.SchwitzersHelp;
 
 import java.awt.*;
 import java.io.*;
@@ -25,8 +24,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.schwitzer.schwitzersHelp.SchwitzersHelp.VERSION;
 
 /*
     Credits to Yuro for this superb class from FarmHelperV2

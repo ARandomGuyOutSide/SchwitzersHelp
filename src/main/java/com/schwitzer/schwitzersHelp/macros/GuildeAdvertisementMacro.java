@@ -1,12 +1,12 @@
 package com.schwitzer.schwitzersHelp.macros;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import com.schwitzer.schwitzersHelp.discord.DiscordNotifications;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.ChatUtil;
 
 import java.io.IOException;
 import java.util.LinkedList;

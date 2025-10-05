@@ -1,11 +1,11 @@
 package com.schwitzer.schwitzersHelp.commands;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import com.schwitzer.schwitzersHelp.util.ChatUtil;
 import com.schwitzer.schwitzersHelp.util.InventoryUtil;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 
 public class TestingCommand extends CommandBase {
 

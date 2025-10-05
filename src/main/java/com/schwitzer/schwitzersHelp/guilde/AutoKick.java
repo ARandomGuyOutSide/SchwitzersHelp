@@ -1,32 +1,27 @@
 package com.schwitzer.schwitzersHelp.guilde;
 
-import cc.polyfrost.oneconfig.events.event.InitializationEvent;
-import cc.polyfrost.oneconfig.events.event.WorldLoadEvent;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.schwitzer.schwitzersHelp.SchwitzersHelp;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import com.schwitzer.schwitzersHelp.util.ChatUtil;
 import com.schwitzer.schwitzersHelp.util.TimerUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class AutoKick {
     private static final String API_KEY = "https://api.dergruenkohl.com/kicks/goodz4";

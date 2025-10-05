@@ -1,8 +1,8 @@
 package com.schwitzer.schwitzersHelp.util;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 
 public class ChatUtil {
 

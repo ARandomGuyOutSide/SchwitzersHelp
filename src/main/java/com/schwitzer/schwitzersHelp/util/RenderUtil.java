@@ -1,6 +1,7 @@
 package com.schwitzer.schwitzersHelp.util;
 
 import cc.polyfrost.oneconfig.config.core.OneColor;
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +18,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 
 import static net.minecraft.client.gui.Gui.drawRect;
 

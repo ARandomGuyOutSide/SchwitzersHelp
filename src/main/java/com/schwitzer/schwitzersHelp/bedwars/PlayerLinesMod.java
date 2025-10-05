@@ -1,16 +1,14 @@
 package com.schwitzer.schwitzersHelp.bedwars;
 
 import cc.polyfrost.oneconfig.config.core.OneColor;
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import com.schwitzer.schwitzersHelp.util.RenderUtil;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Vec3;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.Vec3;
-import org.lwjgl.opengl.GL11;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 
 import java.util.Collection;
 

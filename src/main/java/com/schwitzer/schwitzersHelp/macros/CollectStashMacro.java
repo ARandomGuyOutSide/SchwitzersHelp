@@ -1,6 +1,9 @@
 package com.schwitzer.schwitzersHelp.macros;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
+import com.schwitzer.schwitzersHelp.util.ChatUtil;
 import com.schwitzer.schwitzersHelp.util.InventoryUtil;
+import com.schwitzer.schwitzersHelp.util.TimerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.settings.KeyBinding;
@@ -9,9 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
-import com.schwitzer.schwitzersHelp.util.ChatUtil;
-import com.schwitzer.schwitzersHelp.util.TimerUtil;
 
 import java.util.LinkedList;
 import java.util.List;

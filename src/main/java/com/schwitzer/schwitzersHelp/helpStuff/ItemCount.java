@@ -1,5 +1,6 @@
 package com.schwitzer.schwitzersHelp.helpStuff;
 
+import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -7,7 +8,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 
 public class ItemCount {
 

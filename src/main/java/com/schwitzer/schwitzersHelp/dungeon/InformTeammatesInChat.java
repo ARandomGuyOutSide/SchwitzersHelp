@@ -42,11 +42,11 @@ public class InformTeammatesInChat {
 
                 if(!customLeapMessage.isEmpty())
                 {
-                    ChatUtil.sendMessage(customLeapMessage + " " + playerName);
+                    ChatUtil.sendMessage("/pc " + customLeapMessage + " " + playerName);
                 }
                 else
                 {
-                    ChatUtil.sendMessage("Leaped to " + playerName);
+                    ChatUtil.sendMessage("/pc Leaped to " + playerName);
                 }
             }
         }
@@ -54,18 +54,18 @@ public class InformTeammatesInChat {
         {
             if(message.startsWith("your bonzo's mask saved your life!"))
             {
-                ChatUtil.sendMessage("Bonzo popped");
+                ChatUtil.sendMessage("/pc Bonzo popped");
                 GuiUtil.drawTitle("Bonzo has been popped", 3000, 2.5f, Color.RED);
 
             }
             else if(message.startsWith("your spirit mask saved your life!") || message.startsWith("second wind activated!"))
             {
-                ChatUtil.sendMessage("Spirit popped");
+                ChatUtil.sendMessage("/pc Spirit popped");
                 GuiUtil.drawTitle("Spirit has been popped", 3000, 2.5f, Color.RED);
             }
             else if(message.startsWith("your phoenix pet saved you from certain death!"))
             {
-                ChatUtil.sendMessage("Phoenix popped");
+                ChatUtil.sendMessage("/pc Phoenix popped");
                 GuiUtil.drawTitle("Phoenix has been popped", 3000, 2.5f, Color.RED);
             }
         }

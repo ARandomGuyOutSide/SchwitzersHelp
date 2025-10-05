@@ -3,7 +3,6 @@ package com.schwitzer.schwitzersHelp.features;
 import com.schwitzer.schwitzersHelp.config.SchwitzerHelpConfig;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;

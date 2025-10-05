@@ -1,13 +1,13 @@
 package com.schwitzer.schwitzersHelp.config;
 
+import cc.polyfrost.oneconfig.config.Config;
 import cc.polyfrost.oneconfig.config.annotations.*;
 import cc.polyfrost.oneconfig.config.annotations.Number;
 import cc.polyfrost.oneconfig.config.core.OneColor;
 import cc.polyfrost.oneconfig.config.core.OneKeyBind;
-import cc.polyfrost.oneconfig.config.migration.VigilanceName;
-import cc.polyfrost.oneconfig.config.Config;
 import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
+import cc.polyfrost.oneconfig.config.migration.VigilanceName;
 
 /**
  * The main Config entrypoint that extends the Config type and inits the config options.
