@@ -31,28 +31,31 @@ public class SchwitzerHelpConfig extends Config {
     //General
 
     //General
-    @VigilanceName(name = "Rainbow mode", category = General, subcategory = "Blocks")
-    @Switch(name = "Rainbow mode", category = General, subcategory = "Blocks")
+    @VigilanceName(name = "Rainbow Mode", category = General, subcategory = "Blocks")
+    @Switch(name = "Rainbow Mode", category = General, subcategory = "Blocks")
     public boolean rainbow = false;
 
-    @Switch(name = "Block Esp outline", category = General, subcategory = "Blocks")
+    @Switch(name = "Block Esp Outline", category = General, subcategory = "Blocks")
     public boolean blockOutline = false;
 
-    @Switch(name = "Debug mode", category = General, subcategory = "Debuging")
+    @Switch(name = "Debug Mode", category = General, subcategory = "Debuging")
     public boolean debugMode = false;
 
-    @Switch(name = "Fun mode ;)", category = General, subcategory = "Fun")
+    @Switch(name = "Fun Mode ;)", category = General, subcategory = "Fun")
     public boolean funMode = true;
 
-    @Switch(name = "Chat mention notification", category = General, subcategory = "QOL")
+    @Switch(name = "Chat Mention Notification", category = General, subcategory = "QOL")
     public boolean chatMention = true;
 
-    @Number(name = "Titel duration (s)", category = General, min = 1, max = 10, subcategory = "QOL")
+    @Number(name = "Titel Duration (s)", category = General, min = 1, max = 10, subcategory = "QOL")
     public int chatMentionTitleDuration = 3;
+
+    @Switch(name = "Auto Change Chat On Party Join", category = General, subcategory = "QOL")
+    public boolean autoChangeChat = true;
 
     //Bedwars
 
-    @VigilanceName(name = "Bed wars", category = WallHacks, subcategory = "Players")
+    @VigilanceName(name = "Bed Wars", category = WallHacks, subcategory = "Players")
 
     @Switch(name = "Player Esp", category = WallHacks, subcategory = "Players")
     public boolean playerEsp = true;
@@ -81,13 +84,13 @@ public class SchwitzerHelpConfig extends Config {
     @Switch(name = "Key Mobs Esp", category = Dungeons, subcategory = "Mob Esp")
     public boolean keyMobEsp = true;
 
-    @Color(name = "Color of the Key Mob Esp", category = Dungeons, subcategory = "Mob Esp")
+    @Color(name = "Color Of The Key Mob Esp", category = Dungeons, subcategory = "Mob Esp")
     public OneColor keyMobEspColor = new OneColor(50, 100, 100, 255);
 
     @Switch(name = "Bat Esp", category = Dungeons, subcategory = "Mob Esp")
     public boolean batEsp = true;
 
-    @Color(name = "Color of the Bat Esp", category = Dungeons, subcategory = "Mob Esp")
+    @Color(name = "Color Of The Bat Esp", category = Dungeons, subcategory = "Mob Esp")
     public OneColor batEspColor = new OneColor(50, 100, 100, 255);
 
     @Switch(name = "Ghost Block", category = Dungeons, subcategory = "Ghost Block", size = 2)
@@ -102,13 +105,13 @@ public class SchwitzerHelpConfig extends Config {
     @Switch(name = "Make Essence/Readstone Head Ghost Block", category = Dungeons, subcategory = "Ghost Block")
     public boolean ghostBlockEssence = true;
 
-    @Switch(name = "Send leap message", category = Dungeons, subcategory = "Chat Stuff")
+    @Switch(name = "Send Leap Message", category = Dungeons, subcategory = "Chat Stuff")
     public boolean sendLeapMessage = true;
 
-    @Text(name = "Custom leap message", placeholder = "Leaped to ", multiline = false, category = Dungeons, subcategory = "Chat Stuff")
+    @Text(name = "Custom Leap Message", placeholder = "Leaped to ", multiline = false, category = Dungeons, subcategory = "Chat Stuff")
     public String customLeapMessage = "";
 
-    @Switch(name = "Send saved message", description = "Send messages when you where saved by your bonzo/spirit mask or phonix pet", category = Dungeons, subcategory = "Chat Stuff", size = 2)
+    @Switch(name = "Send Saved Message", description = "Send messages when you where saved by your bonzo/spirit mask or phonix pet", category = Dungeons, subcategory = "Chat Stuff", size = 2)
     public boolean sendSavedMessage = true;
 
     @Switch(name = "Shut Up Dungeons!", description = "Hides all messages received in dungeons", category = Dungeons, subcategory = "Chat Stuff")
@@ -129,13 +132,13 @@ public class SchwitzerHelpConfig extends Config {
     @Switch(name = "Coal Esp", category = Mining, subcategory = "Coal Esp")
     public boolean coalEsp = false;
 
-    @Color(name = "Color of Coal Esp", category = Mining, subcategory = "Coal Esp")
+    @Color(name = "Color Of Coal Esp", category = Mining, subcategory = "Coal Esp")
     public OneColor coalEspColor = new OneColor(50, 100, 100, 255);
 
     @Switch(name = "Best Coal Vein Line", category = Mining, subcategory = "Coal Esp")
     public boolean coalVeinLine = false;
 
-    @Color(name = "Color of Line Esp", category = Mining, subcategory = "Coal Esp")
+    @Color(name = "Color Of Line Esp", category = Mining, subcategory = "Coal Esp")
     public OneColor coalEspLineColor = new OneColor(50, 100, 100, 255);
 
     @Slider(name = "Distance", category = Mining, subcategory = "Coal Esp", min = 1, max = 50)
@@ -148,7 +151,7 @@ public class SchwitzerHelpConfig extends Config {
     @Switch(name = "Modify Movementspeed", category = Help, subcategory = "Modify Movement", size = 1)
     public boolean modify_movementspeed = false;
 
-    @Number(name = "Set movementspeed value", category = Help, subcategory = "Modify Movement", min = 1.0f, max = 25.0f, size = 1)
+    @Number(name = "Set Movementspeed Value", category = Help, subcategory = "Modify Movement", min = 1.0f, max = 25.0f, size = 1)
     public float movementspeed = 1;
 
     @Switch(name = "Modify Movementspeed Hypixel", category = Help, subcategory = "Modify Movement", size = 2)
@@ -160,7 +163,7 @@ public class SchwitzerHelpConfig extends Config {
     @Switch(name = "No Fall", category = Help, subcategory = "Modify Movement", size = 2)
     public boolean noFall = false;
 
-    @Switch(name = "Auto jump", category = Help, description = "Activating it can bypass SOME anit cheat plugins", subcategory = "Modify Movement", size = 2)
+    @Switch(name = "Auto Jump", category = Help, description = "Activating it can bypass SOME anit cheat plugins", subcategory = "Modify Movement", size = 2)
     public boolean auto_jump = true;
 
 
@@ -182,7 +185,7 @@ public class SchwitzerHelpConfig extends Config {
     @Switch(name = "Reach", category = Help, subcategory = "Combat", size = 1)
     public boolean reach = false;
 
-    @Number(name = "Reach distance", category = Help, subcategory = "Combat", min = 3.0f, max = 6.0f, size = 1)
+    @Number(name = "Reach Distance", category = Help, subcategory = "Combat", min = 3.0f, max = 6.0f, size = 1)
     public float reach_distance = 1;
 
     @Switch(name = "Aim Assist", category = Help, subcategory = "Combat", size = 1)
@@ -221,10 +224,10 @@ public class SchwitzerHelpConfig extends Config {
 
     @VigilanceName(name = "Minigames", category = Minigames, subcategory = "Minigames")
 
-    @Switch(name = "ZombiesGame Esp", category = Minigames, subcategory = "Zombies")
+    @Switch(name = "Zombies Game Esp", category = Minigames, subcategory = "Zombies")
     public boolean zombieEsp = false;
 
-    @Color(name = "ZombiesGame Esp Color", category = Minigames, subcategory = "Zombies")
+    @Color(name = "Zombies Game Esp Color", category = Minigames, subcategory = "Zombies")
     public OneColor zombies_color = new OneColor(50, 100, 100, 255);
 
     @Switch(name = "Dragon Esp", category = Minigames, subcategory = "Disasters")
@@ -247,7 +250,7 @@ public class SchwitzerHelpConfig extends Config {
     @Color(name = "Slayer Esp Color", category = Slayers, subcategory = "General")
     public OneColor slayerEspColor = new OneColor(50, 100, 100, 255);
 
-    @Switch(name = "Slayer carry mode", category = Slayers, subcategory = "General")
+    @Switch(name = "Slayer Carry Mode", category = Slayers, subcategory = "General")
     public boolean slayerCarryMode = false;
 
     @Text(name = "Carry Name/s", category = Slayers, subcategory = "General")
@@ -266,19 +269,19 @@ public class SchwitzerHelpConfig extends Config {
     @KeyBind(name = "Macro Key", category = Macros, subcategory = "Bazaar Ordering Macro")
     public OneKeyBind bazaarOrderingMacroKey = new OneKeyBind();
 
-    @Dropdown(name = "Item place", options = {"Already in bazaar", "Sack"}, category = Macros, subcategory = "Bazaar Ordering Macro")
+    @Dropdown(name = "Item Place", options = {"Already in bazaar", "Sack"}, category = Macros, subcategory = "Bazaar Ordering Macro")
     public int itemPlaceOption = 0;
 
-    @Switch(name = "Sell offer", category = Macros, subcategory = "Bazaar Ordering Macro")
+    @Switch(name = "Sell Offer", category = Macros, subcategory = "Bazaar Ordering Macro")
     public boolean sellOffer = false;
 
-    @Switch(name = "Custom price/s", category = Macros, subcategory = "Bazaar Ordering Macro")
+    @Switch(name = "Custom Price/s", category = Macros, subcategory = "Bazaar Ordering Macro")
     public boolean customPrices = false;
 
-    @Text(name = "Item name/s", placeholder = "enchanted_coal;redstone", multiline = true, category = Macros, subcategory = "Bazaar Ordering Macro")
+    @Text(name = "Item Name/s", placeholder = "enchanted_coal;redstone", multiline = true, category = Macros, subcategory = "Bazaar Ordering Macro")
     public String itemNames = "";
 
-    @Text(name = "Item price/s", placeholder = "1.3k;7", description = "Use in right order as item names!", multiline = true, category = Macros, subcategory = "Bazaar Ordering Macro")
+    @Text(name = "Item Price/s", placeholder = "1.3k;7", description = "Use in right order as item names!", multiline = true, category = Macros, subcategory = "Bazaar Ordering Macro")
     public String itemPrices = "";
 
     @KeyBind(name = "Rev Slayer Macro", category = Macros, subcategory = "Rev Slayer Macro")
@@ -288,7 +291,7 @@ public class SchwitzerHelpConfig extends Config {
     // Guild
 
     @VigilanceName(name = "Guild", category = Guild, subcategory = "Guild")
-    @Switch(name = "Message on join", category = Guild, subcategory = "On Join")
+    @Switch(name = "Message On Join", category = Guild, subcategory = "On Join")
     public boolean sendMessageOnGuildJoin = true;
 
 
@@ -296,7 +299,7 @@ public class SchwitzerHelpConfig extends Config {
     // Discord
 
     @VigilanceName(name = "Guild", category = Discord, subcategory = "Discord")
-    @Switch(name = "Send information to discord webhook", category = Discord, subcategory = "Webhook")
+    @Switch(name = "Send Information To Discord Webhook", category = Discord, subcategory = "Webhook")
     public boolean sendDiscordInformation = true;
 
     @Text(name = "Discord Webhook", category = Discord, subcategory = "Webhook", size = 2, placeholder = "Webhook")
@@ -682,6 +685,10 @@ public class SchwitzerHelpConfig extends Config {
 
     public boolean isKickOnSunday() {
         return kickOnSunday;
+    }
+
+    public boolean isAutoChangeChat() {
+        return autoChangeChat;
     }
 }
 

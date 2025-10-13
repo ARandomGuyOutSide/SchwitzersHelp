@@ -247,7 +247,7 @@ public class MiningStuff {
                 vein.centerZ - renderPosZ
         );
 
-        RenderUtil.drawLine(endPos, coalESPLineColor);
+        RenderUtil.drawLine(endPos, coalESPLineColor, true);
     }
 
     // Helper-Klasse für Coal Veins

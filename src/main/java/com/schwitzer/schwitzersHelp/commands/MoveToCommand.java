@@ -6,6 +6,8 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
+import java.util.Arrays;
+import java.util.List;
 
 public class MoveToCommand extends CommandBase {
 
@@ -17,6 +19,11 @@ public class MoveToCommand extends CommandBase {
     @Override
     public String getCommandUsage(ICommandSender sender) {
         return "Moves Player to coordinate";
+    }
+
+    @Override
+    public List<String> getCommandAliases() {
+        return Arrays.asList("sw:moveTo");
     }
 
     @Override
@@ -48,7 +55,7 @@ public class MoveToCommand extends CommandBase {
             return;
         }
 
-        throw new CommandException("Usage: /moveTo <x> <y> <z> OR /moveTo castle");
+        throw new CommandException("Usage: /sw:moveTo <x> <y> <z> OR /sw:moveTo castle");
     }
 
 

@@ -6,6 +6,8 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.EnumChatFormatting;
+import java.util.Arrays;
+import java.util.List;
 
 public class CustomNameToESPCommand extends CommandBase {
     @Override
@@ -15,18 +17,23 @@ public class CustomNameToESPCommand extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/schwitzer:customespname <name|remove name|list|clear> - Add, remove, list, or clear entity names for custom ESP";
+        return "/sw:customespname <add name|remove name|list|clear> - Add, remove, list, or clear entity names for custom ESP";
+    }
+
+    @Override
+    public List<String> getCommandAliases() {
+        return Arrays.asList("sw:customespname");
     }
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         if (args.length == 0) {
-            ChatUtil.formatedChatMessage("Usage: /schwitzer:customespname <name|remove name|list|clear>");
+            ChatUtil.formatedChatMessage("Usage: /sw:customespname <add name|remove name|list|clear>");
             ChatUtil.formatedChatMessage("Examples:");
-            ChatUtil.formatedChatMessage("  /schwitzer:customespname Zombie Villager");
-            ChatUtil.formatedChatMessage("  /schwitzer:customespname remove Zombie Villager");
-            ChatUtil.formatedChatMessage("  /schwitzer:customespname list");
-            ChatUtil.formatedChatMessage("  /schwitzer:customespname clear");
+            ChatUtil.formatedChatMessage("  /sw:customespname add Zombie Villager");
+            ChatUtil.formatedChatMessage("  /sw:customespname remove Zombie Villager");
+            ChatUtil.formatedChatMessage("  /sw:customespname list");
+            ChatUtil.formatedChatMessage("  /sw:customespname clear");
             return;
         }
 
@@ -35,7 +42,7 @@ public class CustomNameToESPCommand extends CommandBase {
         switch (action) {
             case "add":
                 if (args.length < 2) {
-                    ChatUtil.formatedChatMessage("Usage: /customespblock add <block_name>");
+                    ChatUtil.formatedChatMessage("Usage: /sw:customespname add <name>");
                     return;
                 }
                 addName(args[1]);
@@ -48,7 +55,7 @@ public class CustomNameToESPCommand extends CommandBase {
                 break;
             case "remove":
                 if (args.length < 2) {
-                    ChatUtil.formatedChatMessage("Usage: /schwitzer:customespname remove <name>");
+                    ChatUtil.formatedChatMessage("Usage: /sw:customespname remove <name>");
                     return;
                 }
                 // Join all arguments after "remove" to handle names with spaces

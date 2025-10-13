@@ -30,7 +30,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.File;
 
-@Mod(modid = "schwitzershelp", name = "Schwitzers Help", version = "1.07")
+@Mod(modid = "schwitzershelp", name = "Schwitzers Help", version = "1.08")
 public class SchwitzersHelp {
     public static final String VERSION = "%%VERSION%%";
     public static File jarFile = null;
@@ -54,6 +54,7 @@ public class SchwitzersHelp {
         ClientCommandHandler.instance.registerCommand(new MoveToCommand());
         ClientCommandHandler.instance.registerCommand(new CustomBlockToESPCommand());
         ClientCommandHandler.instance.registerCommand(new CustomNameToESPCommand());
+        ClientCommandHandler.instance.registerCommand(new FindItemFromScannedChestsCommand());
 
         // Mod
         MinecraftForge.EVENT_BUS.register(new RenderLogoOnDungeonHub());
@@ -81,6 +82,10 @@ public class SchwitzersHelp {
         MinecraftForge.EVENT_BUS.register(new PlayerMentionedInChat());
         MinecraftForge.EVENT_BUS.register(new MovePlayer());
         MinecraftForge.EVENT_BUS.register(new PlaceBlocksOnCommand());
+        MinecraftForge.EVENT_BUS.register(new AutoChangeChat());
+        MinecraftForge.EVENT_BUS.register(new FindItemFromChests());
+        FindItemFromChests.init(); // Load chest data from file
+
 
         // Guilde
         MinecraftForge.EVENT_BUS.register(new WelcomeMessages());
@@ -114,6 +119,6 @@ public class SchwitzersHelp {
     }
 
     public static String getCurrentVersion() {
-        return "1.0.7";
+        return "1.0.8";
     }
 }

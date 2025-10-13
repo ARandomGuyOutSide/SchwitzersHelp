@@ -16,18 +16,23 @@ public class CustomBlockToESPCommand extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/customespblock <block_name|remove block_name|list|clear> - Add, remove, list, or clear blocks for custom ESP";
+        return "/sw:customespblock <add block_name|remove block_name|list|clear> - Add, remove, list, or clear blocks for custom ESP";
+    }
+
+    @Override
+    public java.util.List<String> getCommandAliases() {
+        return java.util.Arrays.asList("sw:customespblock");
     }
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         if (args.length == 0) {
-            ChatUtil.formatedChatMessage("Usage: /schwitzer:customespblock <add block_name|remove block_name|list|clear>");
+            ChatUtil.formatedChatMessage("Usage: /sw:customespblock <add block_name|remove block_name|list|clear>");
             ChatUtil.formatedChatMessage("Examples:");
-            ChatUtil.formatedChatMessage("  /schwitzer:customespblock add diamond_ore");
-            ChatUtil.formatedChatMessage("  /schwitzer:customespblock remove diamond_ore");
-            ChatUtil.formatedChatMessage("  /schwitzer:customespblock list");
-            ChatUtil.formatedChatMessage("  /schwitzer:customespblock clear");
+            ChatUtil.formatedChatMessage("  /sw:customespblock add diamond_ore");
+            ChatUtil.formatedChatMessage("  /sw:customespblock remove diamond_ore");
+            ChatUtil.formatedChatMessage("  /sw:customespblock list");
+            ChatUtil.formatedChatMessage("  /sw:customespblock clear");
             return;
         }
 
@@ -36,7 +41,7 @@ public class CustomBlockToESPCommand extends CommandBase {
         switch (action) {
             case "add":
                 if (args.length < 2) {
-                    ChatUtil.formatedChatMessage("Usage: /schwitzer:customespblock add <block_name>");
+                    ChatUtil.formatedChatMessage("Usage: /sw:customespblock add <block_name>");
                     return;
                 }
                 addBlock(args[1]);
@@ -49,7 +54,7 @@ public class CustomBlockToESPCommand extends CommandBase {
                 break;
             case "remove":
                 if (args.length < 2) {
-                    ChatUtil.formatedChatMessage("Usage: /schwitzer:customespblock remove <block_name>");
+                    ChatUtil.formatedChatMessage("Usage: /sw:customespblock remove <block_name>");
                     return;
                 }
                 removeBlock(args[1]);

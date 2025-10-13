@@ -6,6 +6,8 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
+import java.util.Arrays;
+import java.util.List;
 
 public class RotateToCommand extends CommandBase {
     @Override
@@ -16,6 +18,11 @@ public class RotateToCommand extends CommandBase {
     @Override
     public String getCommandUsage(ICommandSender sender) {
         return "Rotates Player to coordinate";
+    }
+
+    @Override
+    public List<String> getCommandAliases() {
+        return Arrays.asList("sw:rotateTo");
     }
 
     @Override

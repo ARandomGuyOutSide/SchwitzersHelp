@@ -28,11 +28,11 @@ public class RenderUtil {
 
 
     // Neue überladene drawLine() Methode für Coal Vein Linien
-    public static void drawLine(Vec3 end, OneColor lineColor) {
+    public static void drawLine(Vec3 end, OneColor lineColor, boolean forceColor) {
         Vec3 start = new Vec3(0, Minecraft.getMinecraft().thePlayer.getEyeHeight(), 0);
 
         // Debug: Farbe ausgeben
-        float[] color = getRenderColor(lineColor);
+        float[] color = getRenderColor(lineColor, forceColor);
 
         GlStateManager.pushMatrix();
         GlStateManager.disableTexture2D();
@@ -62,8 +62,8 @@ public class RenderUtil {
         GlStateManager.popMatrix();
     }
 
-    private static float[] getRenderColor(OneColor baseColor) {
-        if (config.isRainbow()) {
+    private static float[] getRenderColor(OneColor baseColor, boolean forceColor) {
+        if (config.isRainbow() && !forceColor) {
             long time = System.currentTimeMillis();
             float hue = (time % 6000) / 6000.0f;
             int rgb = java.awt.Color.HSBtoRGB(hue, 1f, 1f);
@@ -133,7 +133,7 @@ public class RenderUtil {
         double y = pos.getY();
         double z = pos.getZ();
 
-        float[] color = getRenderColor(bed_ESP_color);
+        float[] color = getRenderColor(bed_ESP_color, false);
         GlStateManager.color(color[0], color[1], color[2], color[3]);
 
         EnumFacing facing = blockState.getValue(BlockBed.FACING);
@@ -219,7 +219,7 @@ public class RenderUtil {
     }
 
     public static void drawEntityBox(double x, double y, double z, double width, double height, OneColor color, double yOffset) {
-        float[] col = getRenderColor(color);
+        float[] col = getRenderColor(color, false);
 
         // OpenGL-Zustand korrekt setzen
         GlStateManager.pushMatrix();
@@ -281,7 +281,7 @@ public class RenderUtil {
     }
 
     public static void drawFilledBox(AxisAlignedBB box, OneColor color) {
-        float[] col = getRenderColor(color);
+        float[] col = getRenderColor(color, false);
         drawFilledBox(box, col[0], col[1], col[2], col[3]);
     }
 
@@ -369,7 +369,7 @@ public class RenderUtil {
         if (foundBlocks == null || foundBlocks.isEmpty()) return;
         
         // Choose color based on config (rainbow or default)
-        float[] col = getRenderColor(color);
+        float[] col = getRenderColor(color, false);
         
         // Render each found block
         for (BlockPos pos : foundBlocks) {
@@ -397,7 +397,7 @@ public class RenderUtil {
         if (entities == null || entities.isEmpty()) return;
         
         // Choose color based on config (rainbow or default)
-        float[] renderColor = getRenderColor(color);
+        float[] renderColor = getRenderColor(color, false);
         
         Minecraft mc = Minecraft.getMinecraft();
         

@@ -51,7 +51,7 @@ public class PlayerLinesMod {
                 );
 
                 // Zeichne die Linie mit RenderUtil
-                RenderUtil.drawLine(playerEnd, playerLinesColor);
+                RenderUtil.drawLine(playerEnd, playerLinesColor, false);
             }
         }
     }

@@ -10,6 +10,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
+import java.util.Arrays;
+import java.util.List;
 
 public class PlaceBlockCommand extends CommandBase {
 
@@ -18,12 +20,17 @@ public class PlaceBlockCommand extends CommandBase {
 
     @Override
     public String getCommandName() {
-        return "schwitza";
+        return "schwitzer:place";
     }
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/schwitza place [<block>]";
+        return "/sw:place [<block>]";
+    }
+
+    @Override
+    public List<String> getCommandAliases() {
+        return Arrays.asList("sw:place");
     }
 
     @Override
@@ -33,15 +40,10 @@ public class PlaceBlockCommand extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-        if (args.length < 1 || !"place".equalsIgnoreCase(args[0])) {
-            sender.addChatMessage(new ChatComponentText("§cFalsche Nutzung! Nutze: /schwitza place [<block>]"));
-            return;
-        }
-
         EntityPlayer player = (EntityPlayer) sender;
 
-        // Wenn nur "/schwitza place" eingegeben wird -> Toggle OFF
-        if (args.length == 1) {
+        // Wenn nur "/sw:place" eingegeben wird -> Toggle OFF
+        if (args.length == 0) {
             PlaceBlocksOnCommand.setEnabled(false);
 
             // Ursprüngliches Item zurück in Slot 9 setzen (falls vorhanden)
@@ -59,13 +61,14 @@ public class PlaceBlockCommand extends CommandBase {
             return;
         }
 
-        // Wenn "/schwitza place <block>" eingegeben wird -> Toggle ON + Item geben
-        if (args.length == 2) {
+        // Wenn "/sw:place <block>" eingegeben wird -> Toggle ON + Item geben
+        if (args.length == 1) {
             try {
-                String blockName = args[1];
+                String blockName = args[0]; // Changed from args[1] to args[0]
                 Block block = Block.getBlockFromName(blockName);
 
                 if (block == null) {
+                    sender.addChatMessage(new ChatComponentText("§cBlock " + blockName + " nicht gefunden!"));
                     return;
                 }
 
@@ -99,6 +102,6 @@ public class PlaceBlockCommand extends CommandBase {
         }
 
         // Falsche Anzahl von Argumenten
-        sender.addChatMessage(new ChatComponentText("§cFalsche Nutzung! Nutze: /schwitza place [<block>]"));
+        sender.addChatMessage(new ChatComponentText("§cFalsche Nutzung! Nutze: /sw:place [<block>]"));
     }
 }

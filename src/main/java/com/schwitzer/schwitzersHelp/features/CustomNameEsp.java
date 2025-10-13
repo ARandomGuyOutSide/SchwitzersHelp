@@ -64,7 +64,7 @@ public class CustomNameEsp {
                 line = line.trim();
                 if (line.isEmpty() || line.startsWith("#")) continue;
 
-                customEspNames.add(line);
+                customEspNames.add(line.toLowerCase());
             }
 
             System.out.println("Loaded " + customEspNames.size() + " custom ESP names from file");
@@ -110,7 +110,7 @@ public class CustomNameEsp {
      */
     public static boolean addName(String name) {
         if (name == null || name.trim().isEmpty()) return false;
-        String trimmedName = name.trim();
+        String trimmedName = name.trim().toLowerCase();
         boolean added = customEspNames.add(trimmedName);
         if (added) {
             saveNamesToFile();
@@ -128,7 +128,7 @@ public class CustomNameEsp {
      */
     public static boolean removeName(String name) {
         if (name == null || name.trim().isEmpty()) return false;
-        boolean removed = customEspNames.remove(name.trim());
+        boolean removed = customEspNames.remove(name.trim().toLowerCase());
         if (removed) {
             saveNamesToFile();
         }
@@ -157,7 +157,8 @@ public class CustomNameEsp {
      * @return true if the name is in the ESP list
      */
     public static boolean containsName(String name) {
-        return customEspNames.contains(name);
+        if (name == null) return false;
+        return customEspNames.contains(name.trim().toLowerCase());
     }
 
     /**

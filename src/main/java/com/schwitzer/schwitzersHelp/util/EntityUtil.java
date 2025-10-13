@@ -56,7 +56,12 @@ public class EntityUtil {
                 .filter(entity -> entity instanceof EntityArmorStand)
                 .filter(v ->
                         !v.isDead &&
-                                entityNames.stream().anyMatch(a -> v.getCustomNameTag().contains(a))
+                                entityNames.stream().anyMatch(a -> {
+                                    String tag = v.getCustomNameTag();
+                                    if (tag == null) return false;
+                                    String clean = ChatUtil.removeColorCodes(tag).toLowerCase();
+                                    return clean.contains(a);
+                                })
                 )
                 .forEach(entity -> {
                     Entity livingBase = getEntityCuttingOtherEntity(entity, null);

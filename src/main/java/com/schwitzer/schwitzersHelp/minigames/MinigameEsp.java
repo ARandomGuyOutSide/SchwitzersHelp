@@ -80,7 +80,7 @@ public class MinigameEsp {
                     );
 
                     // Zeichne die Linie vom Spieler zum Drachen
-                    RenderUtil.drawLine(dragonPos, dragonLineColor);
+                    RenderUtil.drawLine(dragonPos, dragonLineColor, false);
                 }
             }
         }

@@ -6,6 +6,8 @@ import com.schwitzer.schwitzersHelp.util.InventoryUtil;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import java.util.Arrays;
+import java.util.List;
 
 public class TestingCommand extends CommandBase {
 
@@ -23,6 +25,11 @@ public class TestingCommand extends CommandBase {
     @Override
     public String getCommandUsage(ICommandSender sender) {
         return "";
+    }
+
+    @Override
+    public List<String> getCommandAliases() {
+        return Arrays.asList("sw:test");
     }
 
     @Override
